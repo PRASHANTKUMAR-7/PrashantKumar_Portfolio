@@ -1,0 +1,21 @@
+{
+  "name": "Prashant Kumar - Portfolio",
+  "short_name": "PK Portfolio",
+  "description": "Personal portfolio website of Prashant Kumar, Full Stack Developer",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["portfolio", "developer", "technology"],
+  "lang": "en",
+  "dir": "ltr"
+}
