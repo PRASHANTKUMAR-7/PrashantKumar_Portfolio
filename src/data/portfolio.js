@@ -1,6 +1,4 @@
-import { PersonalInfo, Project, Experience, Education, Skill, BlogPost } from '../types';
-
-export const personalInfo: PersonalInfo = {
+export const personalInfo = {
   name: "Prashant Kumar",
   title: "Full Stack Developer",
   bio: "Passionate full-stack developer with expertise in modern web technologies. I love creating innovative solutions and bringing ideas to life through clean, efficient code.",
@@ -17,7 +15,7 @@ export const personalInfo: PersonalInfo = {
   }
 };
 
-export const skills: Skill[] = [
+export const skills = [
   { name: "React", level: 95, category: "frontend" },
   { name: "TypeScript", level: 90, category: "frontend" },
   { name: "Next.js", level: 88, category: "frontend" },
@@ -32,7 +30,7 @@ export const skills: Skill[] = [
   { name: "GraphQL", level: 72, category: "backend" }
 ];
 
-export const experiences: Experience[] = [
+export const experiences = [
   {
     id: "1",
     title: "Senior Full Stack Developer",
@@ -80,7 +78,7 @@ export const experiences: Experience[] = [
   }
 ];
 
-export const education: Education[] = [
+export const education = [
   {
     id: "1",
     degree: "Bachelor of Science in Computer Science",
@@ -102,7 +100,7 @@ export const education: Education[] = [
   }
 ];
 
-export const projects: Project[] = [
+export const projects = [
   {
     id: "1",
     title: "E-Commerce Platform",
@@ -145,7 +143,7 @@ export const projects: Project[] = [
   }
 ];
 
-export const blogPosts: BlogPost[] = [
+export const blogPosts = [
   {
     id: "1",
     title: "Building Scalable React Applications",
@@ -177,3 +175,4 @@ export const blogPosts: BlogPost[] = [
     image: "https://images.pexels.com/photos/11035540/pexels-photo-11035540.jpeg?auto=compress&cs=tinysrgb&w=600"
   }
 ];
+

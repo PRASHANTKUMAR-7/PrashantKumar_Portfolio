@@ -4,10 +4,10 @@ import { Calendar, Clock, Tag, Search } from 'lucide-react';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import { blogPosts } from '../../data/portfolio';
 
-const Blog: React.FC = () => {
+const Blog = () => {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.3 });
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedTag, setSelectedTag] = useState<string>('all');
+  const [selectedTag, setSelectedTag] = useState('all');
 
   // Get all unique tags
   const allTags = Array.from(
@@ -23,7 +23,7 @@ const Blog: React.FC = () => {
     return matchesSearch && matchesTag;
   });
 
-  const formatDate = (dateString: string) => {
+  const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { 
       year: 'numeric', 

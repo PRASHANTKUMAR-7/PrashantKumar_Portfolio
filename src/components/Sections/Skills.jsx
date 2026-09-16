@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import { skills } from '../../data/portfolio';
-import { Skill } from '../../types';
 
-const Skills: React.FC = () => {
+const Skills = () => {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.3 });
-  const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [activeCategory, setActiveCategory] = useState('all');
 
   const categories = [
     { id: 'all', name: 'All Skills', color: 'bg-blue-600' },
@@ -20,14 +19,14 @@ const Skills: React.FC = () => {
     ? skills 
     : skills.filter(skill => skill.category === activeCategory);
 
-  const getSkillColor = (category: Skill['category']) => {
+  const getSkillColor = (category) => {
     const colors = {
       frontend: 'from-green-400 to-green-600',
       backend: 'from-purple-400 to-purple-600',
       tools: 'from-orange-400 to-orange-600',
       other: 'from-pink-400 to-pink-600',
     };
-    return colors[category];
+    return colors[category] || 'from-gray-400 to-gray-600';
   };
 
   return (
@@ -73,48 +72,89 @@ const Skills: React.FC = () => {
           ))}
         </motion.div>
 
-        {/* Skills Grid */}
+        {/* Bento Grid Skills Layout */}
         <motion.div
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr"
         >
-          {filteredSkills.map((skill, index) => (
-            <motion.div
-              key={skill.name}
-              layout
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isIntersecting ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -5, scale: 1.02 }}
-              className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  {skill.name}
-                </h3>
-                <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
-                  {skill.level}%
-                </span>
-              </div>
-              
-              {/* Progress Bar */}
-              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mb-4">
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={isIntersecting ? { width: `${skill.level}%` } : {}}
-                  transition={{ duration: 1, delay: 0.5 + index * 0.1 }}
-                  className={`h-3 rounded-full bg-gradient-to-r ${getSkillColor(skill.category)}`}
-                />
-              </div>
-              
-              {/* Category Badge */}
-              <div className="flex justify-end">
-                <span className={`px-3 py-1 text-xs font-semibold rounded-full bg-gradient-to-r ${getSkillColor(skill.category)} text-white`}>
-                  {skill.category}
-                </span>
-              </div>
-            </motion.div>
-          ))}
+          {filteredSkills.map((skill, index) => {
+            const isHighLevel = skill.level >= 85;
+            const isLarge = isHighLevel && index % 4 === 0;
+            
+            return (
+              <motion.div
+                key={skill.name}
+                layout
+                initial={{ opacity: 0, scale: 0.8, rotateY: -15 }}
+                animate={isIntersecting ? { opacity: 1, scale: 1, rotateY: 0 } : {}}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -8, rotateY: 5, rotateX: 5, z: 50 }}
+                className={`tilt-3d glassmorphism-light dark:glassmorphism-dark p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 will-change-transform ${
+                  isLarge ? 'md:col-span-2' : ''
+                } ${isHighLevel ? 'border-2 border-blue-500/30 dark:border-[#00f0ff]/30 hover:border-blue-500 dark:hover:border-[#00f0ff]' : ''}`}
+              >
+                <div className={`flex items-center justify-between mb-4 ${isLarge ? 'mb-6' : ''}`}>
+                  <h3 className={`font-semibold text-gray-900 dark:text-white ${isLarge ? 'text-xl' : 'text-lg'}`}>
+                    {skill.name}
+                  </h3>
+                  <motion.span
+                    whileHover={{ scale: 1.2 }}
+                    className={`font-bold ${isLarge ? 'text-lg' : 'text-sm'} bg-gradient-to-r from-blue-600 to-purple-600 dark:from-[#00f0ff] dark:to-[#b026ff] bg-clip-text text-transparent`}
+                  >
+                    {skill.level}%
+                  </motion.span>
+                </div>
+                
+                {/* Enhanced Progress Bar with Glow */}
+                <div className={`w-full bg-gray-200 dark:bg-gray-700 rounded-full ${isLarge ? 'h-4' : 'h-3'} mb-4 overflow-hidden`}>
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={isIntersecting ? { width: `${skill.level}%` } : {}}
+                    transition={{ duration: 1.2, delay: 0.5 + index * 0.1, ease: "easeOut" }}
+                    className={`${isLarge ? 'h-4' : 'h-3'} rounded-full bg-gradient-to-r ${getSkillColor(skill.category)} relative overflow-hidden`}
+                  >
+                    <motion.div
+                      animate={{
+                        x: ['-100%', '100%'],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                    />
+                    {skill.level >= 80 && (
+                      <motion.div
+                        animate={{
+                          boxShadow: [
+                            '0 0 10px rgba(0, 240, 255, 0.5)',
+                            '0 0 20px rgba(0, 240, 255, 0.8)',
+                            '0 0 10px rgba(0, 240, 255, 0.5)',
+                          ],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                        }}
+                        className="absolute inset-0"
+                      />
+                    )}
+                  </motion.div>
+                </div>
+                
+                {/* Enhanced Category Badge */}
+                <div className="flex justify-end">
+                  <motion.span
+                    whileHover={{ scale: 1.1 }}
+                    className={`px-3 py-1 text-xs font-semibold rounded-full bg-gradient-to-r ${getSkillColor(skill.category)} text-white shadow-lg`}
+                  >
+                    {skill.category}
+                  </motion.span>
+                </div>
+              </motion.div>
+            );
+          })}
         </motion.div>
 
         {/* Skills Summary */}

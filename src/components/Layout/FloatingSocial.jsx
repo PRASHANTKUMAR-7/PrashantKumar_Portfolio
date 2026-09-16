@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Github, Linkedin, Twitter, Instagram } from 'lucide-react';
 import { personalInfo } from '../../data/portfolio';
 
-const FloatingSocial: React.FC = () => {
+const FloatingSocial = () => {
   const socialIcons = {
     github: Github,
     linkedin: Linkedin,
@@ -20,7 +20,7 @@ const FloatingSocial: React.FC = () => {
     >
       <div className="flex flex-col space-y-4">
         {Object.entries(personalInfo.social).map(([platform, url], index) => {
-          const Icon = socialIcons[platform as keyof typeof socialIcons];
+          const Icon = socialIcons[platform];
           if (!Icon || !url) return null;
           
           return (

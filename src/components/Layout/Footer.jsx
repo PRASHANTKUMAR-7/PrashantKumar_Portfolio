@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Heart, Github, Linkedin, Twitter, Instagram, Mail, Phone, MapPin } from 'lucide-react';
 import { personalInfo } from '../../data/portfolio';
 
-const Footer: React.FC = () => {
+const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialIcons = {
@@ -89,7 +89,7 @@ const Footer: React.FC = () => {
             <h3 className="text-xl font-bold text-blue-400">Follow Me</h3>
             <div className="flex space-x-4">
               {Object.entries(personalInfo.social).map(([platform, url]) => {
-                const Icon = socialIcons[platform as keyof typeof socialIcons];
+                const Icon = socialIcons[platform];
                 if (!Icon || !url) return null;
                 
                 return (

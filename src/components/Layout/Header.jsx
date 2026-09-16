@@ -4,7 +4,7 @@ import { Menu, X, Sun, Moon, Monitor } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 import { personalInfo } from '../../data/portfolio';
 
-const Header: React.FC = () => {
+const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, setTheme, resolvedTheme } = useTheme();
@@ -28,7 +28,7 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
+  const scrollToSection = (href) => {
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -48,7 +48,7 @@ const Header: React.FC = () => {
   };
 
   const cycleTheme = () => {
-    const themes: Array<'light' | 'dark' | 'system'> = ['light', 'dark', 'system'];
+    const themes = ['light', 'dark', 'system'];
     const currentIndex = themes.indexOf(theme);
     const nextIndex = (currentIndex + 1) % themes.length;
     setTheme(themes[nextIndex]);
@@ -60,7 +60,7 @@ const Header: React.FC = () => {
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg'
+          ? 'glassmorphism-light dark:glassmorphism-dark shadow-lg'
           : 'bg-transparent'
       }`}
     >
@@ -72,7 +72,7 @@ const Header: React.FC = () => {
             className="text-2xl font-bold text-gray-900 dark:text-white"
           >
             {personalInfo.name.split(' ').map((word, index) => (
-              <span key={index} className={index === 0 ? 'text-blue-600' : ''}>
+              <span key={index} className={index === 0 ? 'text-blue-600 dark:text-[#00f0ff] neon-text-blue' : ''}>
                 {word}{' '}
               </span>
             ))}
@@ -83,43 +83,59 @@ const Header: React.FC = () => {
             {navItems.map((item) => (
               <motion.button
                 key={item.name}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => scrollToSection(item.href)}
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
+                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-[#00f0ff] transition-colors duration-200 relative group"
               >
                 {item.name}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-[#00f0ff] group-hover:w-full transition-all duration-300" />
               </motion.button>
             ))}
             
-            {/* Theme Toggle */}
+            {/* Enhanced Theme Toggle */}
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.1, rotate: 15 }}
+              whileTap={{ scale: 0.9, rotate: -15 }}
               onClick={cycleTheme}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+              className="relative p-3 rounded-xl glassmorphism-light dark:glassmorphism-dark text-gray-700 dark:text-gray-300 hover:glow-blue dark:hover:glow-blue transition-all duration-300 group"
               title={`Current theme: ${theme}`}
             >
-              {getThemeIcon()}
+              <motion.div
+                key={theme}
+                initial={{ rotate: -180, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                {getThemeIcon()}
+              </motion.div>
+              <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-blue-600 dark:bg-[#00f0ff] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.button>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-4">
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.1, rotate: 15 }}
+              whileTap={{ scale: 0.9 }}
               onClick={cycleTheme}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
+              className="relative p-3 rounded-xl glassmorphism-light dark:glassmorphism-dark text-gray-700 dark:text-gray-300"
             >
-              {getThemeIcon()}
+              <motion.div
+                key={theme}
+                initial={{ rotate: -180, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                {getThemeIcon()}
+              </motion.div>
             </motion.button>
             
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
+              className="p-2 rounded-lg glassmorphism-light dark:glassmorphism-dark text-gray-700 dark:text-gray-300"
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </motion.button>

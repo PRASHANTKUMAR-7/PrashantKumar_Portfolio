@@ -4,22 +4,17 @@ import { Calendar, MapPin, Briefcase, GraduationCap, ChevronRight } from 'lucide
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import { experiences, education } from '../../data/portfolio';
 
-const Experience: React.FC = () => {
+const Experience = () => {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.3 });
-  const [activeTab, setActiveTab] = useState<'experience' | 'education'>('experience');
+  const [activeTab, setActiveTab] = useState('experience');
 
-  const formatDate = (dateString: string) => {
+  const formatDate = (dateString) => {
     if (dateString === 'Present') return 'Present';
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
   };
 
-  const TimelineItem: React.FC<{
-    item: any;
-    index: number;
-    isLast: boolean;
-    type: 'experience' | 'education';
-  }> = ({ item, index, isLast, type }) => {
+  const TimelineItem = ({ item, index, isLast, type }) => {
     const Icon = type === 'experience' ? Briefcase : GraduationCap;
     
     return (
@@ -81,7 +76,7 @@ const Experience: React.FC = () => {
           
           {type === 'experience' && item.description && (
             <ul className="space-y-2 mb-4">
-              {item.description.map((desc: string, i: number) => (
+              {item.description.map((desc, i) => (
                 <li key={i} className="flex items-start text-gray-600 dark:text-gray-400">
                   <ChevronRight className="w-4 h-4 mr-2 mt-0.5 text-blue-600 flex-shrink-0" />
                   <span>{desc}</span>
@@ -96,7 +91,7 @@ const Experience: React.FC = () => {
           
           {item.technologies && (
             <div className="flex flex-wrap gap-2">
-              {item.technologies.map((tech: string) => (
+              {item.technologies.map((tech) => (
                 <span
                   key={tech}
                   className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm rounded-full"

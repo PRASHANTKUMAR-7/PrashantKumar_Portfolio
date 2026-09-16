@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Home, ArrowLeft } from 'lucide-react';
 
-const NotFound: React.FC = () => {
+const NotFound = () => {
   const handleGoHome = () => {
     window.location.href = '/';
   };

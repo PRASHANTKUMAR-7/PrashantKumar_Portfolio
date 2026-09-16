@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, Home, Mail } from 'lucide-react';
 
-const MessageSent: React.FC = () => {
+const MessageSent = () => {
   const handleGoHome = () => {
     window.location.href = '/';
   };

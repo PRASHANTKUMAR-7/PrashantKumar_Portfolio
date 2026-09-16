@@ -1,0 +1,55 @@
+// update data for personalInfo, skills, experiences, education, projects, and blogPosts to reflect the latest information and achievements of Prashant Kumar.
+PRASHANT KUMAR
+Software Developer
+ +91-7905745130 # prashantk.stu@gmail.com ï prashant-kumar-tech § PRASHANTKUMAR-7
+SUMMARY
+• Software Developer with hands-on experience building and shipping production systems – REST APIs, backend
+automation, and full-stack web applications. Proven ability to design scalable architectures, ship 20+ APIs, cut latency by
+35%, and reduce manual effort by 30% through clean engineering and AI-assisted tooling.
+TECHNICAL SKILLS
+Languages: JavaScript (ES6), TypeScript, Python, Java, Dart
+Frontend: React.js, HTML, CSS, Tailwind CSS, Material UI (MUI), TanStack Query
+Backend: Node.js, Express.js, REST APIs, MongoDB, PostgreSQL, SQL, JWT & OAuth
+AI/ML Tools: Gemini AI Integration, Prompt Engineering, LLM-Powered Automation, Cursor, GitHub Copilot
+Testing: Postman, Playwright
+Soft Skills: Public Speaking, Event Coordination, Collaboration
+EXPERIENCE
+Founding Engineer 2025 – Present
+Zestro Remote
+• Founding engineer building Zestro, an F&B CRM/POS management app, using React, TypeScript, MUI, MongoDB.
+• Shipped a solution to a problem raised by the customer, helping a pilot customer manage 400+ orders on the platform.
+• Fixed a route-transition bug causing redundant API calls, cutting backend server load.
+• Built the loyalty points feature by integrating Order, Customer, and Loyalty Point schemas in MongoDB, driving a 30%
+increase in repeat customers at Tattva Cafe.
+• Collaborated across frontend, backend, and business teams to resolve cross-functional issues.
+• Raised PRs daily, with 2 PRs/week reviewed by the reporting manager.
+Software Engineering Intern July 2025 – Sep 2025
+Indian Institute of Technology (BHU) Varanasi Varanasi, India
+• Engineered LLM-driven automation with Playwright, streamlining 5+ processes and cutting manual effort 30%.
+• Scaled backend automation to 1,000+ data interactions/day, resolving key performance bottlenecks.
+• Structured APIs and workflows through regular design reviews with senior engineers.
+• Documented automation workflows and API design decisions to support long-term maintainability.
+• Optimized data preprocessing workflows to improve pipeline throughput and consistency.
+• Integrated Hugging Face speech-to-text models to convert user voice input into text for automation workflows.
+PROJECTS
+PulseTalk – Real-Time Chat & Video Application | MERN, Socket.IO, WebRTC July 2025
+• Architected a MERN chat/video platform using Socket.IO & WebRTC for live messaging and calls.
+• Cut message latency 35% while scaling to 1,000+ concurrent users.
+• Built secure Gmail domain-validated auth and Google OAuth 2.0 (Passport.js) with MongoDB data models.
+• Deployed the application to production (Render), enabling a live, publicly accessible demo.
+• Fixed a WebRTC connection-drop bug during video calls, improving call reliability.
+• Built real-time cross-language message translation, letting users message across languages (e.g., Japanese to French)
+with support for major international and select regional Indian languages.
+IntelliWear – Full Stack E-Commerce Platform | MERN, Stripe, Gemini AI § Code January 2026
+• Engineered 20+ production REST APIs (auth, products, orders, admin), powering the platform’s entire backend
+operations.
+• Delivered secure end-to-end payment integration with Stripe, enabling reliable checkout.
+• Implemented JWT/OAuth authentication with password recovery, securing account access.
+• Boosted product discoverability by 40% through Gemini AI-powered recommendations and AI-powered search.
+• Hardened platform reliability by validating all 20+ endpoints through rigorous Postman testing before deployment.
+EDUCATION
+Uttarakhand Technical University Graduation: July 2026
+B.Tech in Computer Science Engineering – Roorkee Institute of Technology – 7.6 CGPA
+CERTIFICATES / EXTRACURRICULAR
+• Certifications: Google UI, Intro to AI, Meta React (Basic & Advanced), IBM Node + Express, AWS, IMUN Speaking.
+• Extracurricular Activities: Technomax Winner, TIE Dehradun, Climate Clock Assembly Event, Volleyball Champion.

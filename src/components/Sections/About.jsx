@@ -2,9 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Code, Coffee, Music, Camera, Gamepad2, Book } from 'lucide-react';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
-import { personalInfo } from '../../data/portfolio';
 
-const About: React.FC = () => {
+const About = () => {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.3 });
 
   const interests = [
@@ -62,15 +61,23 @@ const About: React.FC = () => {
               </p>
             </div>
 
-            {/* Stats */}
+            {/* Enhanced Stats */}
             <div className="grid grid-cols-3 gap-6 mt-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-center"
+                whileHover={{ scale: 1.1, y: -5 }}
+                className="text-center p-4 glassmorphism-light dark:glassmorphism-dark rounded-xl"
               >
-                <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">50+</div>
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={isIntersecting ? { scale: 1 } : {}}
+                  transition={{ delay: 0.6, type: "spring" }}
+                  className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-[#00f0ff] dark:to-[#b026ff] bg-clip-text text-transparent"
+                >
+                  50+
+                </motion.div>
                 <div className="text-gray-600 dark:text-gray-400">Projects</div>
               </motion.div>
               
@@ -78,9 +85,17 @@ const About: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.5 }}
-                className="text-center"
+                whileHover={{ scale: 1.1, y: -5 }}
+                className="text-center p-4 glassmorphism-light dark:glassmorphism-dark rounded-xl"
               >
-                <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">5+</div>
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={isIntersecting ? { scale: 1 } : {}}
+                  transition={{ delay: 0.7, type: "spring" }}
+                  className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-[#00f0ff] dark:to-[#b026ff] bg-clip-text text-transparent"
+                >
+                  5+
+                </motion.div>
                 <div className="text-gray-600 dark:text-gray-400">Years</div>
               </motion.div>
               
@@ -88,9 +103,17 @@ const About: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.6 }}
-                className="text-center"
+                whileHover={{ scale: 1.1, y: -5 }}
+                className="text-center p-4 glassmorphism-light dark:glassmorphism-dark rounded-xl"
               >
-                <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">100+</div>
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={isIntersecting ? { scale: 1 } : {}}
+                  transition={{ delay: 0.8, type: "spring" }}
+                  className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-[#00f0ff] dark:to-[#b026ff] bg-clip-text text-transparent"
+                >
+                  100+
+                </motion.div>
                 <div className="text-gray-600 dark:text-gray-400">Commits</div>
               </motion.div>
             </div>
@@ -112,13 +135,18 @@ const About: React.FC = () => {
                 {interests.map((interest, index) => (
                   <motion.div
                     key={interest.name}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={isIntersecting ? { opacity: 1, scale: 1 } : {}}
+                    initial={{ opacity: 0, scale: 0.8, rotateY: -15 }}
+                    animate={isIntersecting ? { opacity: 1, scale: 1, rotateY: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    className="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-all duration-300"
+                    whileHover={{ scale: 1.1, y: -8, rotateY: 5, z: 20 }}
+                    className="tilt-3d p-4 glassmorphism-light dark:glassmorphism-dark rounded-xl hover:shadow-xl transition-all duration-300 will-change-transform"
                   >
-                    <interest.icon className={`w-8 h-8 ${interest.color} mb-2`} />
+                    <motion.div
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <interest.icon className={`w-8 h-8 ${interest.color} mb-2`} />
+                    </motion.div>
                     <div className="font-semibold text-gray-900 dark:text-white">
                       {interest.name}
                     </div>

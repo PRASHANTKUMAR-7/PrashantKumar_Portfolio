@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
 
-export type Theme = 'light' | 'dark' | 'system';
-
 export const useTheme = () => {
-  const [theme, setTheme] = useState<Theme>(() => {
-    const stored = localStorage.getItem('theme') as Theme;
+  const [theme, setTheme] = useState(() => {
+    const stored = localStorage.getItem('theme');
     return stored || 'system';
   });
 
-  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light');
+  const [resolvedTheme, setResolvedTheme] = useState('light');
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
