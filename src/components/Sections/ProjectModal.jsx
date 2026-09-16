@@ -1,10 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { CheckCircle2, FileText, Github, X } from 'lucide-react';
+import { getProjectSources, useAssets } from '../../data/assets';
 
 export const ProjectPreview = ({ id, title, stack }) => {
-  const candidates = [`/assets/projects/${id}.png`, `/assets/projects/${id}.jpg`];
+  const assets = useAssets();
+  const candidates = useMemo(() => getProjectSources(assets, id), [assets, id]);
   const [index, setIndex] = useState(0);
   const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    setIndex(0);
+    setFailed(false);
+  }, [candidates]);
 
   const src = candidates[index];
 
@@ -23,6 +30,8 @@ export const ProjectPreview = ({ id, title, stack }) => {
     <img
       src={src}
       alt={`${title} preview`}
+      loading="lazy"
+      decoding="async"
       onError={() => (index < candidates.length - 1 ? setIndex(index + 1) : setFailed(true))}
       className="h-full w-full object-cover"
     />

@@ -1,25 +1,41 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowDown, Download, Github, Linkedin, Mail, Quote } from 'lucide-react';
 import { personalInfo, heroRoles, motto } from '../../data/portfolio';
+import { getProfileSources, getResume, useAssets } from '../../data/assets';
 import Reveal from '../Common/Reveal';
 
-const Avatar = ({ name, src }) => {
-  const [error, setError] = useState(false);
+const Avatar = ({ name }) => {
+  const assets = useAssets();
+  const sources = getProfileSources(assets);
+  const [index, setIndex] = useState(0);
+  const [failed, setFailed] = useState(false);
   const initials = name
     .split(' ')
     .map((word) => word[0])
     .join('');
+
+  useEffect(() => {
+    setIndex(0);
+    setFailed(false);
+  }, [sources]);
+
+  const candidate = sources[index];
+  const showImage = candidate && !failed;
 
   return (
     <div className="relative flex flex-col items-center gap-7">
       <div className="relative">
         <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-indigo-500/20 via-transparent to-violet-500/20 blur-xl" />
         <div className="relative h-64 w-64 overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-xl dark:border-slate-700 dark:bg-slate-900 sm:h-72 sm:w-72">
-          {src && !error ? (
+          {showImage ? (
             <img
-              src={src}
+              src={candidate}
               alt={`Portrait of ${name}`}
-              onError={() => setError(true)}
+              loading="lazy"
+              decoding="async"
+              onError={() =>
+                index < sources.length - 1 ? setIndex(index + 1) : setFailed(true)
+              }
               className="h-full w-full object-cover"
             />
           ) : (
@@ -32,13 +48,17 @@ const Avatar = ({ name, src }) => {
         </div>
 
         {/* Floating stat chips (from updateddata.txt) */}
-        <div className="absolute -left-6 top-8 hidden rounded-xl border border-slate-200 bg-white/95 px-4 py-2.5 shadow-lg backdrop-blur sm:block dark:border-slate-700 dark:bg-slate-900/95">
+        <div className="absolute -left-16 top-12 hidden w-28 rounded-xl border border-slate-200 bg-white/95 px-4 py-2.5 shadow-lg backdrop-blur sm:block dark:border-slate-700 dark:bg-slate-900/95">
           <p className="text-sm font-bold text-slate-900 dark:text-white">20+ APIs</p>
-          <p className="text-[11px] text-slate-500 dark:text-slate-400">shipped in production</p>
+          <p className="text-[11px] leading-snug text-slate-500 dark:text-slate-400">
+            shipped in production
+          </p>
         </div>
-        <div className="absolute -right-6 bottom-10 hidden rounded-xl border border-slate-200 bg-white/95 px-4 py-2.5 shadow-lg backdrop-blur sm:block dark:border-slate-700 dark:bg-slate-900/95">
+        <div className="absolute -right-16 bottom-12 hidden w-28 rounded-xl border border-slate-200 bg-white/95 px-4 py-2.5 shadow-lg backdrop-blur sm:block dark:border-slate-700 dark:bg-slate-900/95">
           <p className="text-sm font-bold text-slate-900 dark:text-white">35%</p>
-          <p className="text-[11px] text-slate-500 dark:text-slate-400">latency reduced</p>
+          <p className="text-[11px] leading-snug text-slate-500 dark:text-slate-400">
+            latency reduced
+          </p>
         </div>
       </div>
 
@@ -59,6 +79,8 @@ const Avatar = ({ name, src }) => {
 };
 
 const Hero = () => {
+  const assets = useAssets();
+  const resume = getResume(assets);
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
   return (
@@ -120,8 +142,8 @@ const Hero = () => {
             <Reveal delay={4}>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
                 <a
-                  href={personalInfo.resumeUrl}
-                  download="Prashant_Kumar_Resume.pdf"
+                  href={resume.url}
+                  download={resume.downloadName}
                   className="btn-primary"
                 >
                   <Download className="h-4 w-4" />
@@ -162,7 +184,7 @@ const Hero = () => {
           </div>
 
           <Reveal delay={2} className="flex justify-center lg:justify-end">
-            <Avatar name={personalInfo.name} src={personalInfo.profileImage} />
+            <Avatar name={personalInfo.name} />
           </Reveal>
         </div>
 
