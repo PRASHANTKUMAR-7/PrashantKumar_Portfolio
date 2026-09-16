@@ -157,6 +157,21 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Gentle floating motion for hero accents */
+  .animate-float-soft {
+    animation: float-soft 5s ease-in-out infinite;
+  }
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 /* Accessibility: honor reduced-motion preferences */

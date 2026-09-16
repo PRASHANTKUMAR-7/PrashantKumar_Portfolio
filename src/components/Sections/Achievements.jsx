@@ -1,5 +1,5 @@
-import { CalendarClock, Medal, Ticket, Trophy } from 'lucide-react';
-import { achievements } from '../../data/portfolio';
+import { CalendarClock, Code2, Medal, Ticket, Trophy } from 'lucide-react';
+import { achievements, competitiveStats } from '../../data/portfolio';
 import Reveal from '../Common/Reveal';
 import SectionHeading from '../Common/SectionHeading';
 
@@ -34,6 +34,32 @@ const Achievements = () => (
           );
         })}
       </div>
+
+      {/* Competitive programming */}
+      <Reveal delay={1}>
+        <div className="mx-auto mt-10 max-w-3xl">
+          <div className="card p-6">
+            <h3 className="flex items-center gap-2.5 text-base font-semibold">
+              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400">
+                <Code2 className="h-5 w-5" />
+              </span>
+              Competitive programming
+            </h3>
+            <dl className="mt-5 grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-4">
+              {competitiveStats.map((stat) => (
+                <div key={`${stat.label}-${stat.value}`}>
+                  <dd className="text-lg font-bold text-indigo-600 dark:text-indigo-400">
+                    {stat.value}
+                  </dd>
+                  <dt className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+                    {stat.label}
+                  </dt>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </Reveal>
     </div>
   </section>
 );

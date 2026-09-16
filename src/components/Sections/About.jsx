@@ -5,8 +5,8 @@ import SectionHeading from '../Common/SectionHeading';
 const focusAreas = [
   'Production REST APIs',
   'Full-Stack Web Apps',
-  'Backend Automation',
-  'AI / LLM Tooling',
+  'AI / LLM Automation',
+  'Containers & Cloud (ongoing)',
 ];
 
 const About = () => (
@@ -22,20 +22,23 @@ const About = () => (
         <Reveal>
           <div className="space-y-4 leading-relaxed text-slate-600 dark:text-slate-400">
             <p>
-              I'm a Software Developer with hands-on experience shipping production systems — REST
-              APIs, backend automation, and full-stack web applications. My work spans founding
-              engineering at a start-up and an automation-focused internship at IIT (BHU),
-              Varanasi, where I built systems that run in the real world.
+              I'm a Computer Science Engineering student (B.Tech, graduating 2026) and a passionate
+              software developer driven by curiosity and the desire to build meaningful technology.
+              I've worked as a Founding Engineer at Zestro and completed an internship at the Jay
+              Chaudhry Software Innovation Centre, IIT (BHU) Varanasi, where I built LLM automation
+              pipelines and AI-powered tooling.
             </p>
             <p>
-              On the frontend I work with React, TypeScript, Tailwind CSS, and Material UI; on the
-              backend with Node.js, Express, and databases like MongoDB and PostgreSQL. I also
-              integrate AI and LLM tooling — Gemini, Playwright-driven automation, and speech-to-text
-              models — to remove manual effort and improve product experience.
+              Along the way I've picked up payment integrations (Stripe), real-time systems
+              (Socket.IO, WebRTC), and cloud deployment (Render, AWS). On the frontend I work with
+              React, TypeScript, Material UI, and Tailwind CSS; on the backend with Node.js,
+              Express, MongoDB, and PostgreSQL.
             </p>
             <p>
-              I care about clean engineering: structured APIs, tested endpoints, documented
-              workflows, and regular design reviews. My focus areas are:
+              Right now I'm deepening my skills in containers and orchestration (Docker,
+              Kubernetes, OpenShift) and applied AI (LangChain, Hugging Face, Gemini AI, prompt
+              engineering) — building systems where AI can reason, call tools, and act
+              autonomously. My focus areas are:
             </p>
           </div>
         </Reveal>

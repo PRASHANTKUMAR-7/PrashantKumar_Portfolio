@@ -16,9 +16,11 @@ export const personalInfo = {
 
 export const heroRoles = [
   'Software Developer',
-  'Full-Stack Engineer',
-  'AI-Assisted Automation',
+  'Full-Stack · MERN & PERN',
+  'AI-Powered Automation',
 ];
+
+export const motto = 'Think As a Winner, You Will Always Be a Winner';
 
 export const stats = [
   { value: '20+', label: 'Production APIs shipped' },
@@ -31,32 +33,38 @@ export const skillGroups = [
   {
     id: 'languages',
     label: 'Languages',
-    description: 'Core programming languages used daily.',
+    description: 'Core programming languages across web and mobile.',
     skills: ['JavaScript (ES6)', 'TypeScript', 'Python', 'Java', 'Dart'],
   },
   {
     id: 'frontend',
     label: 'Frontend',
     description: 'Building responsive, accessible interfaces.',
-    skills: ['React.js', 'HTML', 'CSS', 'Tailwind CSS', 'Material UI (MUI)', 'TanStack Query'],
+    skills: ['React.js', 'Material UI (MUI)', 'Tailwind CSS', 'TanStack Query', 'HTML', 'CSS', 'Flutter'],
   },
   {
     id: 'backend',
     label: 'Backend',
-    description: 'APIs, databases, and secure authentication.',
-    skills: ['Node.js', 'Express.js', 'REST APIs', 'MongoDB', 'PostgreSQL', 'SQL', 'JWT & OAuth'],
+    description: 'APIs, databases, real-time systems, and payments.',
+    skills: ['Node.js', 'Express.js', 'REST APIs', 'MongoDB', 'PostgreSQL', 'SQL', 'Socket.IO', 'WebRTC', 'Stripe', 'JWT & OAuth'],
   },
   {
     id: 'ai-ml',
-    label: 'AI / ML Tools',
-    description: 'Shipping AI-assisted features and automation.',
-    skills: ['Gemini AI Integration', 'Prompt Engineering', 'LLM-Powered Automation', 'Cursor', 'GitHub Copilot'],
+    label: 'AI / ML & Automation',
+    description: 'Shipping AI-assisted features and agentic pipelines.',
+    skills: ['Gemini AI Integration', 'LangChain', 'Hugging Face', 'Prompt Engineering', 'LLM-Powered Automation', 'n8n', 'MCP', 'Cursor', 'GitHub Copilot'],
+  },
+  {
+    id: 'devops',
+    label: 'DevOps & Cloud',
+    description: 'Deployment, containers, and cloud (ongoing).',
+    skills: ['Docker', 'Kubernetes', 'OpenShift', 'AWS', 'Render', 'Git'],
   },
   {
     id: 'testing',
     label: 'Testing',
     description: 'Validating reliability before release.',
-    skills: ['Postman', 'Playwright'],
+    skills: ['Postman', 'Playwright', 'Hoppscotch'],
   },
   {
     id: 'soft',
@@ -87,8 +95,8 @@ export const experiences = [
   {
     id: 'iit-bhu',
     role: 'Software Engineering Intern',
-    company: 'Indian Institute of Technology (BHU), Varanasi',
-    org: 'Research internship',
+    company: 'IIT (BHU) Varanasi',
+    org: 'Jay Chaudhry Software Innovation Centre · Research internship',
     location: 'Varanasi, India',
     period: 'Jul 2025 — Sep 2025',
     highlights: [
@@ -105,13 +113,33 @@ export const experiences = [
 
 export const projects = [
   {
+    id: 'intelliwear',
+    title: 'IntelliWear',
+    tagline: 'Full-Stack AI E-Commerce Platform',
+    period: 'January 2026',
+    stack: 'MERN · Stripe · Gemini AI',
+    description:
+      'An AI-powered e-commerce platform with 20+ REST APIs, secure Stripe checkout, and Gemini AI-driven product recommendations that improved discoverability by ~40%.',
+    features: [
+      'Engineered 20+ production REST APIs (auth, products, orders, admin), powering the platform\u2019s entire backend operations.',
+      'Delivered secure end-to-end payment integration with Stripe, enabling reliable checkout.',
+      'Implemented JWT/OAuth authentication with password recovery, securing account access.',
+      'Boosted product discoverability by 40% through Gemini AI-powered recommendations and AI-powered search.',
+      'Hardened platform reliability by validating all 20+ endpoints through rigorous Postman testing before deployment.',
+    ],
+    technologies: ['MongoDB', 'Express.js', 'React', 'Node.js', 'Stripe', 'Gemini AI'],
+    categories: ['fullstack', 'ai'],
+    github: 'https://github.com/PRASHANTKUMAR-7/IntelliWear',
+    featured: true,
+  },
+  {
     id: 'pulsetalk',
     title: 'PulseTalk',
     tagline: 'Real-Time Chat & Video Application',
-    date: 'July 2025',
+    period: 'July 2025',
     stack: 'MERN · Socket.IO · WebRTC',
     description:
-      'A real-time chat and video platform enabling live messaging and calls, built on the MERN stack with Socket.IO and WebRTC. Deployed to production on Render for a live, publicly accessible demo.',
+      'A real-time chat and video platform enabling live messaging and calls, built on the MERN stack with Socket.IO and WebRTC. Deployed to production on Render.',
     features: [
       'Architected a MERN chat/video platform using Socket.IO and WebRTC for live messaging and calls.',
       'Cut message latency by 35% while scaling to 1,000+ concurrent users.',
@@ -121,23 +149,108 @@ export const projects = [
       'Built real-time cross-language message translation, letting users message across languages (e.g., Japanese to French) with support for major international and select regional Indian languages.',
     ],
     technologies: ['MongoDB', 'Express.js', 'React', 'Node.js', 'Socket.IO', 'WebRTC', 'Passport.js'],
+    categories: ['fullstack'],
+    github: 'https://github.com/PRASHANTKUMAR-7/PulseTalk',
+    featured: true,
   },
   {
-    id: 'intelliwear',
-    title: 'IntelliWear',
-    tagline: 'Full-Stack E-Commerce Platform',
-    date: 'January 2026',
-    stack: 'MERN · Stripe · Gemini AI',
+    id: 'testweaver',
+    title: 'TestWeaver',
+    tagline: 'AI-Powered Testing Platform',
+    period: 'Internship · 2025',
+    stack: 'MERN · Playwright · Hugging Face · LangChain',
     description:
-      'A production-grade e-commerce platform with a full REST API suite, secure Stripe checkout, and Gemini AI-powered discovery.',
+      'An AI-powered web application testing platform built during my internship at IIT (BHU) — automates browser testing from natural language prompts.',
     features: [
-      'Engineered 20+ production REST APIs (auth, products, orders, admin), powering the platform\u2019s entire backend operations.',
-      'Delivered secure end-to-end payment integration with Stripe, enabling reliable checkout.',
-      'Implemented JWT/OAuth authentication with password recovery, securing account access.',
-      'Boosted product discoverability by 40% through Gemini AI-powered recommendations and AI-powered search.',
-      'Hardened platform reliability by validating all 20+ endpoints through rigorous Postman testing before deployment.',
+      'Automates browser testing from natural language prompts.',
+      'Built with the MERN stack, Playwright, Hugging Face, and LangChain.',
+      'JWT-secured REST APIs with Docker-based deployment.',
     ],
-    technologies: ['MongoDB', 'Express.js', 'React', 'Node.js', 'Stripe', 'Gemini AI'],
+    technologies: ['MongoDB', 'Express.js', 'React', 'Node.js', 'Playwright', 'Hugging Face', 'LangChain', 'Docker'],
+    categories: ['fullstack', 'ai'],
+  },
+  {
+    id: 'sprintly',
+    title: 'Sprintly',
+    tagline: 'Kanban-Style Project Board',
+    period: 'Personal project',
+    stack: 'MERN · OAuth 2.0',
+    description:
+      'A MERN kanban-style ticket/board app with workspaces, team members, and email notifications — supporting both email/password login and Google OAuth 2.0.',
+    features: [
+      'Kanban-style ticket board with workspaces and team members.',
+      'Email notifications for ticket activity.',
+      'Implemented Google OAuth 2.0 login (Passport.js) alongside existing JWT auth without touching the existing email/password flow.',
+    ],
+    technologies: ['MongoDB', 'Express.js', 'React', 'Node.js', 'Passport.js', 'JWT'],
+    categories: ['fullstack'],
+    github: 'https://github.com/PRASHANTKUMAR-7/Sprintly',
+  },
+  {
+    id: 'globetreker',
+    title: 'GlobeTreker',
+    tagline: 'Travel Campground Platform',
+    period: 'Personal project',
+    stack: 'Node.js · Express · EJS · MongoDB',
+    description:
+      'A full-stack travel campground platform with user reviews and dynamic EJS rendering.',
+    features: [
+      'Campground listings with full CRUD operations.',
+      'User reviews and ratings.',
+      'Dynamic server-side rendering with EJS.',
+    ],
+    technologies: ['Node.js', 'Express.js', 'MongoDB', 'EJS'],
+    categories: ['fullstack'],
+    github: 'https://github.com/PRASHANTKUMAR-7/GlobeTreker',
+  },
+  {
+    id: 'weather-app',
+    title: 'Weather App',
+    tagline: 'React Weather Application',
+    period: 'Personal project',
+    stack: 'React · REST API',
+    description:
+      'A modern React weather application with live API data.',
+    features: [
+      'Live weather data from a public API.',
+      'Clean, modern React interface.',
+    ],
+    technologies: ['React.js', 'REST API'],
+    categories: ['frontend'],
+    github: 'https://github.com/PRASHANTKUMAR-7/weather-app-react',
+  },
+  {
+    id: 'golf-site',
+    title: 'Golf Site',
+    tagline: 'Static Golf-Learning Website',
+    period: 'Personal project',
+    stack: 'HTML · CSS · JavaScript',
+    description:
+      'A simple and elegant static golf-learning website.',
+    features: [
+      'Clean, elegant layouts focused on content.',
+      'Vanilla HTML, CSS, and JavaScript.',
+    ],
+    technologies: ['HTML', 'CSS', 'JavaScript'],
+    categories: ['frontend'],
+    github: 'https://github.com/PRASHANTKUMAR-7/golf_site',
+  },
+  {
+    id: 'qr-scanner',
+    title: 'QR Code Scanner & Generator',
+    tagline: 'Flutter Utility App',
+    period: 'Personal project',
+    stack: 'Dart · Flutter',
+    description:
+      'A Dart & Flutter app to quickly scan and generate QR codes with a simple, user-friendly interface.',
+    features: [
+      'Scan QR codes quickly from the camera.',
+      'Generate QR codes on demand.',
+      'Simple, user-friendly Flutter interface.',
+    ],
+    technologies: ['Dart', 'Flutter'],
+    categories: ['mobile'],
+    github: 'https://github.com/PRASHANTKUMAR-7/Flutter_Projects.git',
   },
 ];
 
@@ -153,17 +266,30 @@ export const education = [
 ];
 
 export const certifications = [
-  'Google UI',
-  'Intro to AI',
-  'Meta React (Basic & Advanced)',
-  'IBM Node + Express',
-  'AWS',
-  'IMUN Speaking',
+  { name: 'Build Dynamic User Interfaces (UI) for Websites', issuer: 'Google' },
+  { name: 'Introduction to AI', issuer: 'Google' },
+  { name: 'Maximize Productivity With AI Tools', issuer: 'Google' },
+  { name: 'React Basics', issuer: 'Meta' },
+  { name: 'Advanced React', issuer: 'Meta' },
+  { name: 'Developing Back-End Apps with Node.js and Express', issuer: 'IBM' },
+  { name: 'Flutter and Dart: Developing iOS, Android, and Mobile Apps', issuer: 'IBM' },
+  { name: 'Introduction to Containers with Docker, Kubernetes & OpenShift', issuer: 'IBM' },
+  { name: 'AWS Cloud Technical Essentials', issuer: 'AWS' },
+  { name: 'International Model United Nations', issuer: 'IMUN' },
 ];
 
 export const achievements = [
-  { title: 'Technomax Winner', context: 'Technical competition' },
-  { title: 'TIE Dehradun', context: 'Entrepreneurship event' },
-  { title: 'Climate Clock Assembly Event', context: 'Participation' },
+  { title: 'TiE Dehradun', context: '3rd place' },
+  { title: 'Technomax', context: 'Winner' },
+  { title: 'Climate Clock Assembly', context: 'Contributed to an international digital weather record' },
+  { title: 'JNNSMEE', context: 'National-level participant' },
+  { title: 'IMUN', context: 'Delegate' },
   { title: 'Volleyball Champion', context: 'Sports' },
+];
+
+export const competitiveStats = [
+  { label: 'HackerRank', value: '3★' },
+  { label: 'CodeChef', value: '1★' },
+  { label: 'LeetCode', value: '365-day streak' },
+  { label: 'CodeChef', value: '100-day streak' },
 ];

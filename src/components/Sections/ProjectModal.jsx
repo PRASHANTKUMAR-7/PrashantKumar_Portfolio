@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import { FileText, X } from 'lucide-react';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, FileText, Github, X } from 'lucide-react';
 
-export const ProjectPreview = ({ id, title, stack, large = false }) => {
+export const ProjectPreview = ({ id, title, stack }) => {
   const candidates = [`/assets/projects/${id}.png`, `/assets/projects/${id}.jpg`];
   const [index, setIndex] = useState(0);
   const [failed, setFailed] = useState(false);
@@ -12,10 +11,7 @@ export const ProjectPreview = ({ id, title, stack, large = false }) => {
   if (failed || !src) {
     return (
       <div className="relative flex h-full w-full flex-col items-center justify-center gap-3 overflow-hidden bg-gradient-to-br from-indigo-600 via-indigo-500 to-violet-600 p-6 text-center text-white">
-        <span
-          aria-hidden="true"
-          className={`font-bold tracking-tight ${large ? 'text-7xl' : 'text-6xl'}`}
-        >
+        <span aria-hidden="true" className="text-6xl font-bold tracking-tight">
           {title[0]}
         </span>
         <p className="font-mono text-xs uppercase tracking-widest text-indigo-100/90">{stack}</p>
@@ -72,16 +68,34 @@ const ProjectModal = ({ project, onClose }) => {
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-6 sm:p-8">
+        <div className="flex-none border-b border-slate-100 p-6 sm:p-8 dark:border-slate-800">
           <p className="font-mono text-xs uppercase tracking-widest text-indigo-600 dark:text-indigo-400">
-            {project.date} · {project.stack}
+            {project.period} · {project.stack}
           </p>
-          <h3 className="mt-1.5 text-2xl font-bold tracking-tight">{project.title}</h3>
-          <p className="mt-0.5 text-sm font-medium text-slate-500 dark:text-slate-400">
-            {project.tagline}
-          </p>
+          <div className="mt-1.5 flex items-start justify-between gap-4">
+            <div>
+              <h3 className="text-2xl font-bold tracking-tight">{project.title}</h3>
+              <p className="mt-0.5 text-sm font-medium text-slate-500 dark:text-slate-400">
+                {project.tagline}
+              </p>
+            </div>
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${project.title} source code on GitHub`}
+                className="btn-secondary flex-none !px-4 !py-2"
+              >
+                <Github className="h-4 w-4" />
+                Code
+              </a>
+            )}
+          </div>
+        </div>
 
-          <p className="mt-5 leading-relaxed text-slate-600 dark:text-slate-400">
+        <div className="flex-1 overflow-y-auto p-6 sm:p-8">
+          <p className="leading-relaxed text-slate-600 dark:text-slate-400">
             {project.description}
           </p>
 

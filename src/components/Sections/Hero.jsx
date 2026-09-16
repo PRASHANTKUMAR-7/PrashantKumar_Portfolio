@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { ArrowDown, Download, Github, Linkedin, Mail } from 'lucide-react';
-import { personalInfo, heroRoles } from '../../data/portfolio';
+import { ArrowDown, Download, Github, Linkedin, Mail, Quote } from 'lucide-react';
+import { personalInfo, heroRoles, motto } from '../../data/portfolio';
 import Reveal from '../Common/Reveal';
 
 const Avatar = ({ name, src }) => {
@@ -11,34 +11,49 @@ const Avatar = ({ name, src }) => {
     .join('');
 
   return (
-    <div className="relative">
-      <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-indigo-500/20 via-transparent to-violet-500/20 blur-xl" />
-      <div className="relative h-64 w-64 overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-xl dark:border-slate-700 dark:bg-slate-900 sm:h-72 sm:w-72">
-        {src && !error ? (
-          <img
-            src={src}
-            alt={`Portrait of ${name}`}
-            onError={() => setError(true)}
-            className="h-full w-full object-cover"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900">
-            <span className="text-6xl font-bold tracking-tight text-indigo-600 dark:text-indigo-400">
-              {initials}
-            </span>
-          </div>
-        )}
+    <div className="relative flex flex-col items-center gap-7">
+      <div className="relative">
+        <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-indigo-500/20 via-transparent to-violet-500/20 blur-xl" />
+        <div className="relative h-64 w-64 overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-xl dark:border-slate-700 dark:bg-slate-900 sm:h-72 sm:w-72">
+          {src && !error ? (
+            <img
+              src={src}
+              alt={`Portrait of ${name}`}
+              onError={() => setError(true)}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900">
+              <span className="text-6xl font-bold tracking-tight text-indigo-600 dark:text-indigo-400">
+                {initials}
+              </span>
+            </div>
+          )}
+        </div>
+
+        {/* Floating stat chips (from updateddata.txt) */}
+        <div className="absolute -left-6 top-8 hidden rounded-xl border border-slate-200 bg-white/95 px-4 py-2.5 shadow-lg backdrop-blur sm:block dark:border-slate-700 dark:bg-slate-900/95">
+          <p className="text-sm font-bold text-slate-900 dark:text-white">20+ APIs</p>
+          <p className="text-[11px] text-slate-500 dark:text-slate-400">shipped in production</p>
+        </div>
+        <div className="absolute -right-6 bottom-10 hidden rounded-xl border border-slate-200 bg-white/95 px-4 py-2.5 shadow-lg backdrop-blur sm:block dark:border-slate-700 dark:bg-slate-900/95">
+          <p className="text-sm font-bold text-slate-900 dark:text-white">35%</p>
+          <p className="text-[11px] text-slate-500 dark:text-slate-400">latency reduced</p>
+        </div>
       </div>
 
-      {/* Floating stat chips (from updateddata.txt) */}
-      <div className="absolute -left-6 top-8 hidden rounded-xl border border-slate-200 bg-white/95 px-4 py-2.5 shadow-lg backdrop-blur sm:block dark:border-slate-700 dark:bg-slate-900/95">
-        <p className="text-sm font-bold text-slate-900 dark:text-white">20+ APIs</p>
-        <p className="text-[11px] text-slate-500 dark:text-slate-400">shipped in production</p>
-      </div>
-      <div className="absolute -right-6 bottom-10 hidden rounded-xl border border-slate-200 bg-white/95 px-4 py-2.5 shadow-lg backdrop-blur sm:block dark:border-slate-700 dark:bg-slate-900/95">
-        <p className="text-sm font-bold text-slate-900 dark:text-white">35%</p>
-        <p className="text-[11px] text-slate-500 dark:text-slate-400">latency reduced</p>
-      </div>
+      {/* Floating thought window */}
+      <blockquote className="animate-float-soft relative w-[240px] rounded-2xl border border-slate-200 bg-white/95 p-5 text-center shadow-lg backdrop-blur dark:border-slate-700 dark:bg-slate-900/95">
+        <span className="absolute -top-3 left-1/2 flex h-7 w-7 -translate-x-1/2 items-center justify-center rounded-full bg-indigo-600 text-white shadow-md dark:bg-indigo-500">
+          <Quote className="h-3.5 w-3.5" />
+        </span>
+        <p className="text-sm font-medium italic leading-snug text-slate-800 dark:text-slate-200">
+          &ldquo;{motto}&rdquo;
+        </p>
+        <footer className="mt-3 text-xs font-semibold tracking-wide text-indigo-600 dark:text-indigo-400">
+          — {name}
+        </footer>
+      </blockquote>
     </div>
   );
 };

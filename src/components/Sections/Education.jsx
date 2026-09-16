@@ -59,14 +59,19 @@ const Education = () => {
               <ul className="mt-5 space-y-2.5">
                 {certifications.map((cert) => (
                   <li
-                    key={cert}
+                    key={`${cert.issuer}-${cert.name}`}
                     className="flex items-start gap-2.5 text-sm text-slate-600 dark:text-slate-400"
                   >
                     <span
                       aria-hidden="true"
                       className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-indigo-500"
                     />
-                    {cert}
+                    <span>
+                      <span className="font-medium text-slate-700 dark:text-slate-300">
+                        {cert.issuer}
+                      </span>{' '}
+                      — {cert.name}
+                    </span>
                   </li>
                 ))}
               </ul>

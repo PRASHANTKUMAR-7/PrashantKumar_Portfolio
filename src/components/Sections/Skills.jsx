@@ -1,4 +1,4 @@
-import { Archive, Brain, Braces, LayoutTemplate, ServerCog, Users } from 'lucide-react';
+import { Archive, Brain, Braces, Cloud, LayoutTemplate, ServerCog, Users } from 'lucide-react';
 import { skillGroups } from '../../data/portfolio';
 import Reveal from '../Common/Reveal';
 import SectionHeading from '../Common/SectionHeading';
@@ -8,6 +8,7 @@ const groupIcons = {
   frontend: LayoutTemplate,
   backend: ServerCog,
   'ai-ml': Brain,
+  devops: Cloud,
   testing: Archive,
   soft: Users,
 };
