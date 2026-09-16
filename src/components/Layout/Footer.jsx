@@ -1,129 +1,102 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Heart, Github, Linkedin, Twitter, Instagram, Mail, Phone, MapPin } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 import { personalInfo } from '../../data/portfolio';
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
+  const year = new Date().getFullYear();
 
-  const socialIcons = {
-    github: Github,
-    linkedin: Linkedin,
-    twitter: Twitter,
-    instagram: Instagram,
-  };
+  const quickLinks = [
+    { id: 'about', label: 'About' },
+    { id: 'skills', label: 'Skills' },
+    { id: 'experience', label: 'Experience' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'contact', label: 'Contact' },
+  ];
+
+  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
   return (
-    <footer className="bg-gray-900 dark:bg-black text-white py-12">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="space-y-4"
-          >
-            <h3 className="text-xl font-bold text-blue-400">Get In Touch</h3>
-            <div className="space-y-2">
-              <div className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-blue-400" />
-                <a
-                  href={`mailto:${personalInfo.email}`}
-                  className="hover:text-blue-400 transition-colors duration-200"
-                >
-                  {personalInfo.email}
-                </a>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-blue-400" />
-                <a
-                  href={`tel:${personalInfo.phone}`}
-                  className="hover:text-blue-400 transition-colors duration-200"
-                >
-                  {personalInfo.phone}
-                </a>
-              </div>
-              <div className="flex items-center space-x-3">
-                <MapPin className="w-5 h-5 text-blue-400" />
-                <span>{personalInfo.location}</span>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="space-y-4"
-          >
-            <h3 className="text-xl font-bold text-blue-400">Quick Links</h3>
-            <div className="grid grid-cols-2 gap-2">
-              {['Home', 'About', 'Skills', 'Experience', 'Projects', 'Blog', 'Contact'].map((item) => (
-                <button
-                  key={item}
-                  onClick={() => {
-                    const element = document.querySelector(`#${item.toLowerCase()}`);
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
-                  className="text-left hover:text-blue-400 transition-colors duration-200"
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="space-y-4"
-          >
-            <h3 className="text-xl font-bold text-blue-400">Follow Me</h3>
-            <div className="flex space-x-4">
-              {Object.entries(personalInfo.social).map(([platform, url]) => {
-                const Icon = socialIcons[platform];
-                if (!Icon || !url) return null;
-                
-                return (
-                  <motion.a
-                    key={platform}
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="p-3 bg-gray-800 dark:bg-gray-900 rounded-lg hover:bg-blue-600 transition-colors duration-200"
-                  >
-                    <Icon className="w-5 h-5" />
-                  </motion.a>
-                );
-              })}
-            </div>
-          </motion.div>
+    <footer className="border-t border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+      <div className="contained flex flex-col gap-8 py-12 sm:flex-row sm:items-start sm:justify-between">
+        {/* Brand + tagline */}
+        <div className="max-w-sm space-y-3">
+          <div className="flex items-center gap-2.5">
+            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-600 to-violet-600 text-sm font-bold text-white">
+              PK
+            </span>
+            <span className="font-semibold tracking-tight">{personalInfo.name}</span>
+          </div>
+          <p className="text-sm leading-relaxed text-slate-500 dark:text-slate-400">
+            Software Developer focused on building production systems with React, Node.js, and
+            AI-assisted automation.
+          </p>
+          <div className="flex gap-2">
+            <a
+              href={personalInfo.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub profile"
+              className="icon-btn"
+            >
+              <Github className="h-[18px] w-[18px]" />
+            </a>
+            <a
+              href={personalInfo.linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn profile"
+              className="icon-btn"
+            >
+              <Linkedin className="h-[18px] w-[18px]" />
+            </a>
+            <a href={`mailto:${personalInfo.email}`} aria-label="Email" className="icon-btn">
+              <Mail className="h-[18px] w-[18px]" />
+            </a>
+          </div>
         </div>
 
-        {/* Bottom Bar */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="mt-8 pt-8 border-t border-gray-800 dark:border-gray-700 text-center"
-        >
-          <p className="flex items-center justify-center space-x-2 text-gray-400">
-            <span>© {currentYear} {personalInfo.name}. Made with</span>
-            <Heart className="w-4 h-4 text-red-500" />
-            <span>and React</span>
-          </p>
-        </motion.div>
+        {/* Quick links */}
+        <nav className="space-y-3" aria-label="Footer">
+          <h3 className="text-sm font-semibold">Quick Links</h3>
+          <ul className="grid grid-cols-2 gap-x-10 gap-y-2">
+            {quickLinks.map((link) => (
+              <li key={link.id}>
+                <button
+                  type="button"
+                  onClick={() => scrollTo(link.id)}
+                  className="text-sm text-slate-500 transition-colors hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400"
+                >
+                  {link.label}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Contact */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-semibold">Get in touch</h3>
+          <a
+            href={`mailto:${personalInfo.email}`}
+            className="block text-sm text-slate-500 transition-colors hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400"
+          >
+            {personalInfo.email}
+          </a>
+          <a
+            href={personalInfo.phoneHref}
+            className="block text-sm text-slate-500 transition-colors hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400"
+          >
+            {personalInfo.phoneDisplay}
+          </a>
+          <span className="block text-sm text-slate-500 dark:text-slate-400">
+            {personalInfo.location} · Open to opportunities
+          </span>
+        </div>
+      </div>
+
+      <div className="border-t border-slate-200 py-6 dark:border-slate-800">
+        <p className="contained text-center text-xs text-slate-400 dark:text-slate-500">
+          © {year} {personalInfo.name}. All rights reserved.
+        </p>
       </div>
     </footer>
   );

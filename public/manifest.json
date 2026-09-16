@@ -1,15 +1,15 @@
 {
-  "name": "Prashant Kumar - Portfolio",
+  "name": "Prashant Kumar — Software Developer",
   "short_name": "PK Portfolio",
-  "description": "Personal portfolio website of Prashant Kumar, Full Stack Developer",
+  "description": "Portfolio of Prashant Kumar, Software Developer building production systems with React, Node.js and AI-assisted automation.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#2563eb",
+  "background_color": "#f8fafc",
+  "theme_color": "#4f46e5",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/vite.svg",
+      "src": "/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"

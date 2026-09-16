@@ -1,179 +1,77 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Code, Coffee, Music, Camera, Gamepad2, Book } from 'lucide-react';
-import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
+import { stats } from '../../data/portfolio';
+import Reveal from '../Common/Reveal';
+import SectionHeading from '../Common/SectionHeading';
 
-const About = () => {
-  const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.3 });
+const focusAreas = [
+  'Production REST APIs',
+  'Full-Stack Web Apps',
+  'Backend Automation',
+  'AI / LLM Tooling',
+];
 
-  const interests = [
-    { icon: Code, name: 'Coding', color: 'text-blue-500' },
-    { icon: Coffee, name: 'Coffee', color: 'text-amber-600' },
-    { icon: Music, name: 'Music', color: 'text-purple-500' },
-    { icon: Camera, name: 'Photography', color: 'text-green-500' },
-    { icon: Gamepad2, name: 'Gaming', color: 'text-red-500' },
-    { icon: Book, name: 'Reading', color: 'text-indigo-500' },
-  ];
+const About = () => (
+  <section id="about" className="section">
+    <div className="contained">
+      <SectionHeading
+        eyebrow="About"
+        title="Software Developer building production systems"
+        description="A concise look at who I am and what I focus on."
+      />
 
-  return (
-    <section id="about" className="py-20 bg-white dark:bg-gray-900">
-      <div className="container mx-auto px-6">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 50 }}
-          animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            About Me
-          </h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto rounded-full" />
-        </motion.div>
+      <div className="grid items-start gap-12 lg:grid-cols-2">
+        <Reveal>
+          <div className="space-y-4 leading-relaxed text-slate-600 dark:text-slate-400">
+            <p>
+              I'm a Software Developer with hands-on experience shipping production systems — REST
+              APIs, backend automation, and full-stack web applications. My work spans founding
+              engineering at a start-up and an automation-focused internship at IIT (BHU),
+              Varanasi, where I built systems that run in the real world.
+            </p>
+            <p>
+              On the frontend I work with React, TypeScript, Tailwind CSS, and Material UI; on the
+              backend with Node.js, Express, and databases like MongoDB and PostgreSQL. I also
+              integrate AI and LLM tooling — Gemini, Playwright-driven automation, and speech-to-text
+              models — to remove manual effort and improve product experience.
+            </p>
+            <p>
+              I care about clean engineering: structured APIs, tested endpoints, documented
+              workflows, and regular design reviews. My focus areas are:
+            </p>
+          </div>
+        </Reveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isIntersecting ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-6"
-          >
-            <div className="prose prose-lg dark:prose-invert max-w-none">
-              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                I'm a passionate full-stack developer with over 5 years of experience creating 
-                digital solutions that make a difference. My journey in tech started with a 
-                curiosity about how things work, and it has evolved into a career dedicated to 
-                building innovative web applications.
-              </p>
-              
-              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                I specialize in modern JavaScript frameworks, particularly React and Node.js, 
-                and I'm always eager to learn new technologies. When I'm not coding, you'll 
-                find me exploring the latest tech trends, contributing to open-source projects, 
-                or sharing knowledge with the developer community.
-              </p>
-              
-              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                My goal is to create user-centric applications that not only solve problems 
-                but also provide delightful experiences. I believe in writing clean, 
-                maintainable code and following best practices to ensure scalability and performance.
-              </p>
+        <Reveal delay={1}>
+          <div className="space-y-5">
+            <div className="flex flex-wrap gap-2.5">
+              {focusAreas.map((area) => (
+                <span key={area} className="chip">
+                  {area}
+                </span>
+              ))}
             </div>
 
-            {/* Enhanced Stats */}
-            <div className="grid grid-cols-3 gap-6 mt-8">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                whileHover={{ scale: 1.1, y: -5 }}
-                className="text-center p-4 glassmorphism-light dark:glassmorphism-dark rounded-xl"
-              >
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={isIntersecting ? { scale: 1 } : {}}
-                  transition={{ delay: 0.6, type: "spring" }}
-                  className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-[#00f0ff] dark:to-[#b026ff] bg-clip-text text-transparent"
-                >
-                  50+
-                </motion.div>
-                <div className="text-gray-600 dark:text-gray-400">Projects</div>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                whileHover={{ scale: 1.1, y: -5 }}
-                className="text-center p-4 glassmorphism-light dark:glassmorphism-dark rounded-xl"
-              >
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={isIntersecting ? { scale: 1 } : {}}
-                  transition={{ delay: 0.7, type: "spring" }}
-                  className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-[#00f0ff] dark:to-[#b026ff] bg-clip-text text-transparent"
-                >
-                  5+
-                </motion.div>
-                <div className="text-gray-600 dark:text-gray-400">Years</div>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                whileHover={{ scale: 1.1, y: -5 }}
-                className="text-center p-4 glassmorphism-light dark:glassmorphism-dark rounded-xl"
-              >
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={isIntersecting ? { scale: 1 } : {}}
-                  transition={{ delay: 0.8, type: "spring" }}
-                  className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-[#00f0ff] dark:to-[#b026ff] bg-clip-text text-transparent"
-                >
-                  100+
-                </motion.div>
-                <div className="text-gray-600 dark:text-gray-400">Commits</div>
-              </motion.div>
-            </div>
-          </motion.div>
-
-          {/* Interests */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isIntersecting ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="space-y-8"
-          >
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                What I Love
+            <div className="card p-6">
+              <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                Track record
               </h3>
-              
-              <div className="grid grid-cols-2 gap-4">
-                {interests.map((interest, index) => (
-                  <motion.div
-                    key={interest.name}
-                    initial={{ opacity: 0, scale: 0.8, rotateY: -15 }}
-                    animate={isIntersecting ? { opacity: 1, scale: 1, rotateY: 0 } : {}}
-                    transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                    whileHover={{ scale: 1.1, y: -8, rotateY: 5, z: 20 }}
-                    className="tilt-3d p-4 glassmorphism-light dark:glassmorphism-dark rounded-xl hover:shadow-xl transition-all duration-300 will-change-transform"
-                  >
-                    <motion.div
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <interest.icon className={`w-8 h-8 ${interest.color} mb-2`} />
-                    </motion.div>
-                    <div className="font-semibold text-gray-900 dark:text-white">
-                      {interest.name}
-                    </div>
-                  </motion.div>
+              <dl className="grid grid-cols-2 gap-x-6 gap-y-6">
+                {stats.map((stat) => (
+                  <div key={stat.label}>
+                    <dt className="order-2 mt-1 block text-xs leading-snug text-slate-500 dark:text-slate-400">
+                      {stat.label}
+                    </dt>
+                    <dd className="order-1 text-2xl font-bold text-indigo-600 dark:text-indigo-400">
+                      {stat.value}
+                    </dd>
+                  </div>
                 ))}
-              </div>
+              </dl>
             </div>
-
-            {/* Quote */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="p-6 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl border-l-4 border-blue-600"
-            >
-              <blockquote className="text-gray-700 dark:text-gray-300 italic">
-                "The best way to predict the future is to create it."
-              </blockquote>
-              <cite className="text-blue-600 dark:text-blue-400 font-semibold mt-2 block">
-                - Peter Drucker
-              </cite>
-            </motion.div>
-          </motion.div>
-        </div>
+          </div>
+        </Reveal>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default About;

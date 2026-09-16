@@ -1,173 +1,150 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon, Monitor } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Menu, Moon, Sun, X } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
+import { useActiveSection } from '../../hooks/useActiveSection';
 import { personalInfo } from '../../data/portfolio';
 
-const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const { theme, setTheme, resolvedTheme } = useTheme();
+const NAV_ITEMS = [
+  { id: 'about', label: 'About' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'contact', label: 'Contact' },
+];
 
-  const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Blog', href: '#blog' },
-    { name: 'Contact', href: '#contact' },
-  ];
+const SECTION_IDS = ['home', ...NAV_ITEMS.map((item) => item.id)];
+
+const Header = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { setTheme, resolvedTheme } = useTheme();
+  const activeSection = useActiveSection(SECTION_IDS);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 10);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const scrollToSection = (href) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     setIsMenuOpen(false);
   };
 
-  const getThemeIcon = () => {
-    switch (theme) {
-      case 'light':
-        return <Sun className="w-5 h-5" />;
-      case 'dark':
-        return <Moon className="w-5 h-5" />;
-      default:
-        return <Monitor className="w-5 h-5" />;
-    }
-  };
-
-  const cycleTheme = () => {
-    const themes = ['light', 'dark', 'system'];
-    const currentIndex = themes.indexOf(theme);
-    const nextIndex = (currentIndex + 1) % themes.length;
-    setTheme(themes[nextIndex]);
+  const toggleTheme = () => {
+    const next = resolvedTheme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
   };
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'glassmorphism-light dark:glassmorphism-dark shadow-lg'
+          ? 'border-b border-slate-200/80 bg-white/85 shadow-sm backdrop-blur-md dark:border-slate-800/80 dark:bg-slate-950/85'
           : 'bg-transparent'
       }`}
     >
-      <nav className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold text-gray-900 dark:text-white"
-          >
-            {personalInfo.name.split(' ').map((word, index) => (
-              <span key={index} className={index === 0 ? 'text-blue-600 dark:text-[#00f0ff] neon-text-blue' : ''}>
-                {word}{' '}
-              </span>
-            ))}
-          </motion.div>
+      <nav className="contained flex h-16 items-center justify-between" aria-label="Primary">
+        {/* Brand */}
+        <a
+          href="#home"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollTo('home');
+          }}
+          className="group flex items-center gap-2.5"
+          aria-label={`${personalInfo.name} — home`}
+        >
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-600 to-violet-600 text-sm font-bold text-white shadow-sm transition-transform duration-200 group-hover:scale-105">
+            PK
+          </span>
+          <span className="hidden text-sm font-semibold tracking-tight sm:block">
+            {personalInfo.name}
+          </span>
+        </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <motion.button
-                key={item.name}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => scrollToSection(item.href)}
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-[#00f0ff] transition-colors duration-200 relative group"
-              >
-                {item.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-[#00f0ff] group-hover:w-full transition-all duration-300" />
-              </motion.button>
-            ))}
-            
-            {/* Enhanced Theme Toggle */}
-            <motion.button
-              whileHover={{ scale: 1.1, rotate: 15 }}
-              whileTap={{ scale: 0.9, rotate: -15 }}
-              onClick={cycleTheme}
-              className="relative p-3 rounded-xl glassmorphism-light dark:glassmorphism-dark text-gray-700 dark:text-gray-300 hover:glow-blue dark:hover:glow-blue transition-all duration-300 group"
-              title={`Current theme: ${theme}`}
+        {/* Desktop nav */}
+        <div className="hidden items-center gap-7 md:flex">
+          {NAV_ITEMS.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              onClick={() => scrollTo(item.id)}
+              className={`relative py-1 text-sm font-medium transition-colors duration-200 ${
+                activeSection === item.id
+                  ? 'text-indigo-600 dark:text-indigo-400'
+                  : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
+              }`}
             >
-              <motion.div
-                key={theme}
-                initial={{ rotate: -180, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                transition={{ duration: 0.3 }}
-              >
-                {getThemeIcon()}
-              </motion.div>
-              <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-blue-600 dark:bg-[#00f0ff] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </motion.button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center space-x-4">
-            <motion.button
-              whileHover={{ scale: 1.1, rotate: 15 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={cycleTheme}
-              className="relative p-3 rounded-xl glassmorphism-light dark:glassmorphism-dark text-gray-700 dark:text-gray-300"
-            >
-              <motion.div
-                key={theme}
-                initial={{ rotate: -180, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                transition={{ duration: 0.3 }}
-              >
-                {getThemeIcon()}
-              </motion.div>
-            </motion.button>
-            
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-lg glassmorphism-light dark:glassmorphism-dark text-gray-700 dark:text-gray-300"
-            >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </motion.button>
-          </div>
+              {item.label}
+              <span
+                className={`absolute -bottom-0.5 left-0 h-0.5 rounded-full bg-indigo-600 transition-all duration-300 dark:bg-indigo-400 ${
+                  activeSection === item.id ? 'w-full' : 'w-0'
+                }`}
+              />
+            </button>
+          ))}
         </div>
 
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden mt-4 py-4 border-t border-gray-200 dark:border-gray-700"
-            >
-              {navItems.map((item, index) => (
-                <motion.button
-                  key={item.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  onClick={() => scrollToSection(item.href)}
-                  className="block w-full text-left py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
-                >
-                  {item.name}
-                </motion.button>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} mode`}
+            className="icon-btn"
+          >
+            {resolvedTheme === 'dark' ? (
+              <Sun className="h-[18px] w-[18px]" />
+            ) : (
+              <Moon className="h-[18px] w-[18px]" />
+            )}
+          </button>
+
+          {/* Mobile menu toggle */}
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen((open) => !open)}
+            aria-expanded={isMenuOpen}
+            aria-label="Toggle navigation menu"
+            className="icon-btn md:hidden"
+          >
+            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </nav>
-    </motion.header>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className="overflow-hidden border-t border-slate-200 bg-white md:hidden dark:border-slate-800 dark:bg-slate-950"
+          >
+            <div className="contained flex flex-col gap-1 py-4">
+              {NAV_ITEMS.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => scrollTo(item.id)}
+                  className={`rounded-lg px-3 py-2.5 text-left text-sm font-medium transition-colors ${
+                    activeSection === item.id
+                      ? 'bg-indigo-50 text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-300'
+                      : 'text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
   );
 };
 

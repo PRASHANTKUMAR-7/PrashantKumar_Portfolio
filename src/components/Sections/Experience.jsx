@@ -1,196 +1,83 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Calendar, MapPin, Briefcase, GraduationCap, ChevronRight } from 'lucide-react';
-import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
-import { experiences, education } from '../../data/portfolio';
+import { Briefcase, MapPin } from 'lucide-react';
+import { experiences } from '../../data/portfolio';
+import Reveal from '../Common/Reveal';
+import SectionHeading from '../Common/SectionHeading';
 
-const Experience = () => {
-  const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.3 });
-  const [activeTab, setActiveTab] = useState('experience');
+const Experience = () => (
+  <section id="experience" className="section">
+    <div className="contained">
+      <SectionHeading
+        eyebrow="Experience"
+        title="Where I've built and shipped"
+        description="Professional experience building production software and automation."
+      />
 
-  const formatDate = (dateString) => {
-    if (dateString === 'Present') return 'Present';
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-  };
-
-  const TimelineItem = ({ item, index, isLast, type }) => {
-    const Icon = type === 'experience' ? Briefcase : GraduationCap;
-    
-    return (
-      <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={isIntersecting ? { opacity: 1, x: 0 } : {}}
-        transition={{ duration: 0.6, delay: index * 0.2 }}
-        className="relative flex items-start space-x-6 pb-12"
-      >
-        {/* Timeline Line */}
-        {!isLast && (
-          <div className="absolute left-6 top-12 w-px h-full bg-gray-300 dark:bg-gray-600" />
-        )}
-        
-        {/* Icon */}
-        <motion.div
-          whileHover={{ scale: 1.1 }}
-          className="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-lg"
-        >
-          <Icon className="w-6 h-6" />
-        </motion.div>
-        
-        {/* Content */}
-        <motion.div
-          whileHover={{ x: 5 }}
-          className="flex-1 bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-        >
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-            <div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
-                {type === 'experience' ? item.title : item.degree}
-              </h3>
-              <p className="text-blue-600 dark:text-blue-400 font-semibold">
-                {type === 'experience' ? item.company : item.institution}
-              </p>
-            </div>
-            
-            <div className="flex flex-col md:items-end mt-2 md:mt-0 space-y-1">
-              <div className="flex items-center text-gray-600 dark:text-gray-400">
-                <Calendar className="w-4 h-4 mr-2" />
-                <span className="text-sm">
-                  {formatDate(item.startDate)} - {formatDate(item.endDate)}
-                </span>
-              </div>
-              <div className="flex items-center text-gray-600 dark:text-gray-400">
-                <MapPin className="w-4 h-4 mr-2" />
-                <span className="text-sm">{item.location}</span>
-              </div>
-            </div>
-          </div>
-          
-          {item.gpa && (
-            <div className="mb-4">
-              <span className="inline-block px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-sm font-semibold rounded-full">
-                GPA: {item.gpa}
+      <div className="mx-auto max-w-3xl">
+        <ol className="relative space-y-10 border-l border-slate-200 pl-6 dark:border-slate-700 sm:pl-8">
+          {experiences.map((exp, index) => (
+            <li key={exp.id} className="relative">
+              {/* Timeline node */}
+              <span
+                aria-hidden="true"
+                className="absolute -left-[31px] top-1 flex h-6 w-6 items-center justify-center rounded-full border border-indigo-200 bg-white dark:border-indigo-500/40 dark:bg-slate-950 sm:-left-[39px]"
+              >
+                <span className="h-2.5 w-2.5 rounded-full bg-indigo-600 dark:bg-indigo-400" />
               </span>
-            </div>
-          )}
-          
-          {type === 'experience' && item.description && (
-            <ul className="space-y-2 mb-4">
-              {item.description.map((desc, i) => (
-                <li key={i} className="flex items-start text-gray-600 dark:text-gray-400">
-                  <ChevronRight className="w-4 h-4 mr-2 mt-0.5 text-blue-600 flex-shrink-0" />
-                  <span>{desc}</span>
-                </li>
-              ))}
-            </ul>
-          )}
-          
-          {item.description && type === 'education' && (
-            <p className="text-gray-600 dark:text-gray-400 mb-4">{item.description}</p>
-          )}
-          
-          {item.technologies && (
-            <div className="flex flex-wrap gap-2">
-              {item.technologies.map((tech) => (
-                <span
-                  key={tech}
-                  className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm rounded-full"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          )}
-        </motion.div>
-      </motion.div>
-    );
-  };
 
-  return (
-    <section id="experience" className="py-20 bg-white dark:bg-gray-900">
-      <div className="container mx-auto px-6">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 50 }}
-          animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            Experience & Education
-          </h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto rounded-full mb-8" />
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            My professional journey and educational background
-          </p>
-        </motion.div>
+              <Reveal delay={(index % 2) + 1}>
+                <article className="card p-6 sm:p-7">
+                  <header className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
+                    <div>
+                      <h3 className="text-lg font-semibold">{exp.role}</h3>
+                      <p className="mt-0.5 text-sm font-medium text-indigo-600 dark:text-indigo-400">
+                        {exp.company}
+                      </p>
+                      <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+                        {exp.org}
+                      </p>
+                    </div>
+                    <div className="text-right text-xs text-slate-500 dark:text-slate-400">
+                      <p className="flex items-center gap-1.5 font-medium">
+                        <Briefcase className="h-3.5 w-3.5 text-indigo-500" />
+                        {exp.period}
+                      </p>
+                      <p className="mt-1 flex items-center justify-end gap-1.5">
+                        <MapPin className="h-3.5 w-3.5 text-indigo-500" />
+                        {exp.location}
+                      </p>
+                    </div>
+                  </header>
 
-        {/* Tab Navigation */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex justify-center mb-12"
-        >
-          <div className="bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
-            <button
-              onClick={() => setActiveTab('experience')}
-              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
-                activeTab === 'experience'
-                  ? 'bg-blue-600 text-white shadow-lg'
-                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-              }`}
-            >
-              <Briefcase className="w-5 h-5 inline-block mr-2" />
-              Experience
-            </button>
-            <button
-              onClick={() => setActiveTab('education')}
-              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
-                activeTab === 'education'
-                  ? 'bg-blue-600 text-white shadow-lg'
-                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-              }`}
-            >
-              <GraduationCap className="w-5 h-5 inline-block mr-2" />
-              Education
-            </button>
-          </div>
-        </motion.div>
+                  <ul className="mt-5 space-y-2.5">
+                    {exp.highlights.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-2.5 text-sm leading-relaxed text-slate-600 dark:text-slate-400"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-indigo-500"
+                        />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
 
-        {/* Timeline */}
-        <div className="max-w-4xl mx-auto">
-          {activeTab === 'experience' && (
-            <div>
-              {experiences.map((exp, index) => (
-                <TimelineItem
-                  key={exp.id}
-                  item={exp}
-                  index={index}
-                  isLast={index === experiences.length - 1}
-                  type="experience"
-                />
-              ))}
-            </div>
-          )}
-          
-          {activeTab === 'education' && (
-            <div>
-              {education.map((edu, index) => (
-                <TimelineItem
-                  key={edu.id}
-                  item={edu}
-                  index={index}
-                  isLast={index === education.length - 1}
-                  type="education"
-                />
-              ))}
-            </div>
-          )}
-        </div>
+                  <div className="mt-5 flex flex-wrap gap-2 border-t border-slate-100 pt-4 dark:border-slate-800">
+                    {exp.technologies.map((tech) => (
+                      <span key={tech} className="chip">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </article>
+              </Reveal>
+            </li>
+          ))}
+        </ol>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Experience;

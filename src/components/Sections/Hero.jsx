@@ -1,243 +1,167 @@
-import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown, Download, Mail } from 'lucide-react';
-import { useTypingEffect } from '../../hooks/useTypingEffect';
-import { useMagneticCursor } from '../../hooks/useMagneticCursor';
-import { personalInfo } from '../../data/portfolio';
-import Particles from '../Common/Particles';
+import { useState } from 'react';
+import { ArrowDown, Download, Github, Linkedin, Mail } from 'lucide-react';
+import { personalInfo, heroRoles } from '../../data/portfolio';
+import Reveal from '../Common/Reveal';
 
-const Hero = () => {
-  const skills = ['Full Stack Developer', 'React Expert', 'Node.js Developer', 'UI/UX Enthusiast'];
-  const typedText = useTypingEffect(skills, 100, 50, 2000);
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 300], [0, 150]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
-
-  const contactButtonRef = useMagneticCursor(0.2);
-  const resumeButtonRef = useMagneticCursor(0.2);
-
-  const scrollToAbout = () => {
-    const aboutSection = document.querySelector('#about');
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const handleDownloadResume = () => {
-    const link = document.createElement('a');
-    link.href = personalInfo.resumeUrl;
-    link.download = `${personalInfo.name.replace(' ', '_')}_Resume.pdf`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+const Avatar = ({ name, src }) => {
+  const [error, setError] = useState(false);
+  const initials = name
+    .split(' ')
+    .map((word) => word[0])
+    .join('');
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Animated Gradient Background */}
-      <div className="absolute inset-0 animated-gradient" />
-      
-      {/* Particles */}
-      <Particles count={50} />
-      
-      {/* Enhanced Animated Background Shapes */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          animate={{
-            x: [0, 100, -50, 0],
-            y: [0, -100, 50, 0],
-            rotate: [0, 180, 360],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/20 dark:bg-[#00f0ff]/20 rounded-full blur-3xl neon-blue"
-        />
-        <motion.div
-          animate={{
-            x: [0, -150, 100, 0],
-            y: [0, 100, -50, 0],
-            rotate: [360, 180, 0],
-            scale: [1, 1.3, 1],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 dark:bg-[#b026ff]/20 rounded-full blur-3xl neon-purple"
-        />
-        <motion.div
-          animate={{
-            x: [0, 50, -30, 0],
-            y: [0, -80, 40, 0],
-            rotate: [0, 90, 180, 270, 360],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute top-1/2 left-1/2 w-48 h-48 bg-pink-500/10 dark:bg-pink-500/10 rounded-full blur-3xl"
-        />
+    <div className="relative">
+      <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-indigo-500/20 via-transparent to-violet-500/20 blur-xl" />
+      <div className="relative h-64 w-64 overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-xl dark:border-slate-700 dark:bg-slate-900 sm:h-72 sm:w-72">
+        {src && !error ? (
+          <img
+            src={src}
+            alt={`Portrait of ${name}`}
+            onError={() => setError(true)}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900">
+            <span className="text-6xl font-bold tracking-tight text-indigo-600 dark:text-indigo-400">
+              {initials}
+            </span>
+          </div>
+        )}
       </div>
 
-      <motion.div 
-        style={{ y, opacity }}
-        className="container mx-auto px-6 relative z-10"
-      >
-        <div className="flex flex-col lg:flex-row items-center justify-between">
-          {/* Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="lg:w-1/2 text-center lg:text-left mb-12 lg:mb-0"
-          >
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-lg text-gray-600 dark:text-gray-300 mb-4 font-medium"
-            >
-              Hello, I'm
-            </motion.p>
-            
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-5xl lg:text-7xl font-bold mb-6"
-            >
-              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-[#00f0ff] dark:via-[#b026ff] dark:to-pink-500 bg-clip-text text-transparent neon-text-blue">
-                {personalInfo.name.split(' ')[0]}
-              </span>
-              <span className="text-gray-900 dark:text-white"> {personalInfo.name.split(' ').slice(1).join(' ')}</span>
-            </motion.h1>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="text-2xl lg:text-3xl mb-8 h-12 flex items-center justify-center lg:justify-start"
-            >
-              <span className="border-r-2 border-blue-600 dark:border-[#00f0ff] pr-2 animate-pulse font-semibold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-[#00f0ff] dark:to-[#b026ff] bg-clip-text text-transparent">
-                {typedText}
-              </span>
-            </motion.div>
-            
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl leading-relaxed"
-            >
-              {personalInfo.bio}
-            </motion.p>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-            >
-              <motion.button
-                ref={contactButtonRef}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  const contactSection = document.querySelector('#contact');
-                  if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                className="magnetic px-8 py-3 bg-blue-600 hover:bg-blue-700 dark:bg-[#00f0ff] dark:hover:bg-[#00d4e6] text-white rounded-lg font-semibold transition-all duration-200 flex items-center justify-center space-x-2 glow-blue dark:glow-blue shadow-lg"
-              >
-                <Mail className="w-5 h-5" />
-                <span>Get In Touch</span>
-              </motion.button>
-              
-              <motion.button
-                ref={resumeButtonRef}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleDownloadResume}
-                className="magnetic px-8 py-3 border-2 border-blue-600 dark:border-[#00f0ff] text-blue-600 dark:text-[#00f0ff] hover:bg-blue-600 dark:hover:bg-[#00f0ff] hover:text-white dark:hover:text-gray-900 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center space-x-2 glassmorphism-light dark:glassmorphism-dark"
-              >
-                <Download className="w-5 h-5" />
-                <span>Download Resume</span>
-              </motion.button>
-            </motion.div>
-          </motion.div>
+      {/* Floating stat chips (from updateddata.txt) */}
+      <div className="absolute -left-6 top-8 hidden rounded-xl border border-slate-200 bg-white/95 px-4 py-2.5 shadow-lg backdrop-blur sm:block dark:border-slate-700 dark:bg-slate-900/95">
+        <p className="text-sm font-bold text-slate-900 dark:text-white">20+ APIs</p>
+        <p className="text-[11px] text-slate-500 dark:text-slate-400">shipped in production</p>
+      </div>
+      <div className="absolute -right-6 bottom-10 hidden rounded-xl border border-slate-200 bg-white/95 px-4 py-2.5 shadow-lg backdrop-blur sm:block dark:border-slate-700 dark:bg-slate-900/95">
+        <p className="text-sm font-bold text-slate-900 dark:text-white">35%</p>
+        <p className="text-[11px] text-slate-500 dark:text-slate-400">latency reduced</p>
+      </div>
+    </div>
+  );
+};
 
-          {/* Profile Image with Enhanced Effects */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:w-1/2 flex justify-center"
-          >
-            <motion.div
-              whileHover={{ scale: 1.05, rotate: 2 }}
-              className="relative tilt-3d"
-            >
-              <div className="relative w-80 h-80 lg:w-96 lg:h-96">
-                <motion.div
-                  animate={{ rotate: [0, 360] }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-[#00f0ff] dark:via-[#b026ff] dark:to-pink-500 p-1"
+const Hero = () => {
+  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+
+  return (
+    <section id="home" className="relative overflow-hidden pb-16 pt-28 sm:pb-24 sm:pt-36">
+      {/* Background décor */}
+      <div
+        aria-hidden="true"
+        className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_72%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute -top-32 right-0 -z-10 h-96 w-96 rounded-full bg-indigo-500/20 blur-3xl dark:bg-indigo-500/15"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute -left-24 top-1/2 -z-10 h-72 w-72 rounded-full bg-violet-500/15 blur-3xl dark:bg-violet-500/10"
+      />
+
+      <div className="contained">
+        <div className="grid items-center gap-14 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+            <Reveal>
+              <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-xs font-medium text-slate-600 shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                </span>
+                Open to work
+              </span>
+            </Reveal>
+
+            <Reveal delay={1}>
+              <p className="mt-6 text-sm font-medium uppercase tracking-widest text-indigo-600 dark:text-indigo-400">
+                {heroRoles[0]}
+              </p>
+            </Reveal>
+
+            <Reveal delay={2}>
+              <h1 className="mt-2 text-4xl font-bold leading-tight tracking-tight sm:text-6xl">
+                {personalInfo.firstName}
+                <span className="block bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent dark:from-indigo-400 dark:to-violet-400">
+                  {personalInfo.name.split(' ').slice(1).join(' ')}
+                </span>
+              </h1>
+            </Reveal>
+
+            <Reveal delay={3}>
+              <p className="mt-4 font-mono text-sm text-slate-500 dark:text-slate-400">
+                {heroRoles.slice(1).join(' · ')}
+              </p>
+            </Reveal>
+
+            <Reveal delay={3}>
+              <p className="mt-6 max-w-xl leading-relaxed text-slate-600 dark:text-slate-400">
+                {personalInfo.summary}
+              </p>
+            </Reveal>
+
+            <Reveal delay={4}>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+                <a
+                  href={personalInfo.resumeUrl}
+                  download="Prashant_Kumar_Resume.pdf"
+                  className="btn-primary"
                 >
-                  <div className="w-full h-full rounded-full bg-white dark:bg-gray-900" />
-                </motion.div>
-                <div className="absolute inset-2 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-2xl">
-                  <img
-                    src={personalInfo.profileImage}
-                    alt={personalInfo.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                  <Download className="h-4 w-4" />
+                  Download Resume
+                </a>
+                <button type="button" onClick={() => scrollTo('contact')} className="btn-secondary">
+                  <Mail className="h-4 w-4" />
+                  Get in touch
+                </button>
               </div>
-              
-              {/* Enhanced Floating Elements */}
-              <motion.div
-                animate={{ y: [0, -15, 0], rotate: [0, 10, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="absolute -top-4 -right-4 w-16 h-16 bg-blue-500 dark:bg-[#00f0ff] rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg glow-blue dark:glow-blue"
-              >
-                👋
-              </motion.div>
-              
-              <motion.div
-                animate={{ y: [0, 15, 0], rotate: [0, -10, 10, 0] }}
-                transition={{ duration: 4, repeat: Infinity }}
-                className="absolute -bottom-4 -left-4 w-20 h-20 bg-purple-500 dark:bg-[#b026ff] rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-lg glow-purple dark:glow-purple"
-              >
-                💻
-              </motion.div>
-            </motion.div>
-          </motion.div>
+            </Reveal>
+
+            <Reveal delay={4}>
+              <div className="mt-8 flex items-center gap-3">
+                <a
+                  href={personalInfo.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub profile"
+                  className="icon-btn"
+                >
+                  <Github className="h-[18px] w-[18px]" />
+                </a>
+                <a
+                  href={personalInfo.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn profile"
+                  className="icon-btn"
+                >
+                  <Linkedin className="h-[18px] w-[18px]" />
+                </a>
+                <a href={`mailto:${personalInfo.email}`} aria-label="Email" className="icon-btn">
+                  <Mail className="h-[18px] w-[18px]" />
+                </a>
+              </div>
+            </Reveal>
+          </div>
+
+          <Reveal delay={2} className="flex justify-center lg:justify-end">
+            <Avatar name={personalInfo.name} src={personalInfo.profileImage} />
+          </Reveal>
         </div>
 
-        {/* Enhanced Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.button
-            onClick={scrollToAbout}
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-[#00f0ff] transition-colors duration-200 p-2 rounded-full hover:bg-white/10 dark:hover:bg-gray-800/10"
+        <div className="mt-20 flex justify-center">
+          <button
+            type="button"
+            onClick={() => scrollTo('about')}
+            aria-label="Scroll to About section"
+            className="group flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 text-slate-500 transition-colors hover:border-indigo-500 hover:text-indigo-600 dark:border-slate-700 dark:text-slate-400 dark:hover:border-indigo-400 dark:hover:text-indigo-400"
           >
-            <ChevronDown className="w-8 h-8" />
-          </motion.button>
-        </motion.div>
-      </motion.div>
+            <ArrowDown className="h-5 w-5 transition-transform duration-300 group-hover:translate-y-1" />
+          </button>
+        </div>
+      </div>
     </section>
   );
 };

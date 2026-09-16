@@ -1,15 +1,21 @@
 import js from '@eslint/js';
 import globals from 'globals';
+import typescriptParser from '@typescript-eslint/parser';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 
 export default [
-  { ignores: ['dist'] },
+  { ignores: ['dist', 'node_modules'] },
+  js.configs.recommended,
   {
-    extends: [js.configs.recommended],
     files: ['**/*.{js,jsx}'],
     languageOptions: {
-      ecmaVersion: 2020,
+      ecmaVersion: 2022,
+      sourceType: 'module',
+      parser: typescriptParser,
+      parserOptions: {
+        ecmaFeatures: { jsx: true },
+      },
       globals: globals.browser,
     },
     plugins: {
@@ -23,5 +29,5 @@ export default [
         { allowConstantExport: true },
       ],
     },
-  }
+  },
 ];
