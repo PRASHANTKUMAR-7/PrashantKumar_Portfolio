@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
@@ -11,9 +12,11 @@ import Projects from './components/Sections/Projects';
 import Education from './components/Sections/Education';
 import Achievements from './components/Sections/Achievements';
 import Contact from './components/Sections/Contact';
+import LoadingScreen from './components/Common/LoadingScreen';
 import { personalInfo } from './data/portfolio';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
   return (
     <HelmetProvider>
       <div className="min-h-screen bg-slate-50 font-sans text-slate-700 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-300">
@@ -29,6 +32,10 @@ function App() {
 
         <ScrollProgress />
         <Header />
+
+        {isLoading && (
+          <LoadingScreen onComplete={() => setIsLoading(false)} />
+        )}
 
         <main>
           <Hero />
