@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
-import { CheckCircle2, FileText, Github, X } from 'lucide-react';
+import { CheckCircle2, ExternalLink, FileText, Github, X } from 'lucide-react';
 import { getProjectSources, useAssets } from '../../data/assets';
 
-export const ProjectPreview = ({ id, title, stack }) => {
+export const ProjectPreview = ({ id, title, stack, image }) => {
   const assets = useAssets();
-  const candidates = useMemo(() => getProjectSources(assets, id), [assets, id]);
+  const candidates = useMemo(() => getProjectSources(assets, id, image), [assets, id, image]);
   const [index, setIndex] = useState(0);
   const [failed, setFailed] = useState(false);
 
@@ -66,7 +66,7 @@ const ProjectModal = ({ project, onClose }) => {
 
       <div className="relative z-10 flex max-h-[88vh] w-full max-w-2xl flex-col overflow-hidden rounded-t-2xl border border-slate-200 bg-white shadow-2xl sm:rounded-2xl dark:border-slate-700 dark:bg-slate-900">
         <div className="relative h-44 flex-none">
-          <ProjectPreview id={project.id} title={project.title} stack={project.stack} />
+          <ProjectPreview id={project.id} title={project.title} stack={project.stack} image={project.image} />
           <button
             type="button"
             onClick={onClose}
@@ -88,6 +88,18 @@ const ProjectModal = ({ project, onClose }) => {
                 {project.tagline}
               </p>
             </div>
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${project.title} live demo`}
+                className="btn-secondary flex-none !px-4 !py-2"
+              >
+                <ExternalLink className="h-4 w-4" />
+                Live
+              </a>
+            )}
             {project.github && (
               <a
                 href={project.github}

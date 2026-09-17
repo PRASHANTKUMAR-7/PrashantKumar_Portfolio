@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowUpRight, Github, Sparkles } from 'lucide-react';
+import { ArrowUpRight, ExternalLink, Github, Sparkles } from 'lucide-react';
 import { projects } from '../../data/portfolio';
 import Reveal from '../Common/Reveal';
 import SectionHeading from '../Common/SectionHeading';
@@ -17,7 +17,7 @@ const ProjectCard = ({ project, index, onSelect }) => (
   <Reveal delay={(index % 2) + 1} className="h-full">
     <article className="card group flex h-full flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
       <div className="relative aspect-[16/10] overflow-hidden bg-slate-100 dark:bg-slate-800">
-        <ProjectPreview id={project.id} title={project.title} stack={project.stack} />
+        <ProjectPreview id={project.id} title={project.title} stack={project.stack} image={project.image} />
         {project.featured && (
           <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-slate-950/60 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur">
             <Sparkles className="h-3 w-3 text-amber-300" />
@@ -53,6 +53,18 @@ const ProjectCard = ({ project, index, onSelect }) => (
             View details
             <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </button>
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${project.title} live demo`}
+              className="flex items-center gap-1.5 text-sm font-semibold text-emerald-600 transition-colors hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300"
+            >
+              <ExternalLink className="h-4 w-4" />
+              Live
+            </a>
+          )}
           {project.github && (
             <a
               href={project.github}

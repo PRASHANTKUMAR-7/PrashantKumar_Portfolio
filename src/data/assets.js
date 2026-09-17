@@ -25,11 +25,14 @@ export const getResume = (assets) => assets?.resume || DEFAULT_RESUME;
 export const getProfileSources = (assets) =>
   assets?.profile?.length ? assets.profile : DEFAULT_PROFILE;
 
-export const getProjectSources = (assets, id) => {
+export const getProjectSources = (assets, id, image) => {
   const entry = assets?.projects?.[id];
   const fallback = [`/assets/projects/${id}.png`, `/assets/projects/${id}.jpg`];
-  if (!entry) return fallback;
-  return [].concat(entry, fallback);
+  const sources = [];
+  if (image) sources.push(image);
+  if (entry) sources.push(...[].concat(entry));
+  sources.push(...fallback);
+  return sources;
 };
 
 export const useAssets = () => {
