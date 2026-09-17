@@ -29,49 +29,132 @@ export const stats = [
   { value: '1,000+', label: 'Concurrent users supported' },
 ];
 
-export const skillGroups = [
+export const skillCategories = [
   {
     id: 'languages',
-    label: 'Languages',
-    description: 'Core programming languages across web and mobile.',
-    skills: ['JavaScript (ES6)', 'TypeScript', 'Python', 'Java', 'Dart'],
+    label: 'Programming Languages',
+    color: '#f43f5e',
+    blurb: 'Core languages for everything from scripts to server apps.',
   },
   {
     id: 'frontend',
     label: 'Frontend',
-    description: 'Building responsive, accessible interfaces.',
-    skills: ['React.js', 'Material UI (MUI)', 'Tailwind CSS', 'TanStack Query', 'HTML', 'CSS', 'Flutter'],
+    color: '#06b6d4',
+    blurb: 'Interfaces that feel fast, responsive, and polished.',
   },
   {
     id: 'backend',
     label: 'Backend',
-    description: 'APIs, databases, real-time systems, and payments.',
-    skills: ['Node.js', 'Express.js', 'REST APIs', 'MongoDB', 'PostgreSQL', 'SQL', 'Socket.IO', 'WebRTC', 'Stripe', 'JWT & OAuth'],
+    color: '#f59e0b',
+    blurb: 'APIs, authentication, and server-side logic.',
   },
   {
-    id: 'ai-ml',
-    label: 'AI / ML & Automation',
-    description: 'Shipping AI-assisted features and agentic pipelines.',
-    skills: ['Gemini AI Integration', 'LangChain', 'Hugging Face', 'Prompt Engineering', 'LLM-Powered Automation', 'n8n', 'MCP', 'Cursor', 'GitHub Copilot'],
+    id: 'databases',
+    label: 'Databases',
+    color: '#10b981',
+    blurb: 'Data modeling, queries, and embedded persistence.',
   },
   {
-    id: 'devops',
-    label: 'DevOps & Cloud',
-    description: 'Deployment, containers, and cloud (ongoing).',
-    skills: ['Docker', 'Kubernetes', 'OpenShift', 'AWS', 'Render', 'Git'],
+    id: 'ai',
+    label: 'AI / Generative AI',
+    color: '#a855f7',
+    blurb: 'LLM pipelines, RAG, and prompt-driven AI workflows.',
+  },
+  {
+    id: 'realtime',
+    label: 'Real-Time & Communication',
+    color: '#fb7185',
+    blurb: 'Live messaging, calls, and peer-to-peer connections.',
   },
   {
     id: 'testing',
-    label: 'Testing',
-    description: 'Validating reliability before release.',
-    skills: ['Postman', 'Playwright', 'Hoppscotch'],
+    label: 'Testing & Automation',
+    color: '#84cc16',
+    blurb: 'Reliable validation at speed — even AI-driven.',
   },
   {
-    id: 'soft',
-    label: 'Soft Skills',
-    description: 'Communication and collaboration.',
-    skills: ['Public Speaking', 'Event Coordination', 'Collaboration'],
+    id: 'devops',
+    label: 'DevOps & Deployment',
+    color: '#3b82f6',
+    blurb: 'Containers, cloud, and automated deployment.',
   },
+  {
+    id: 'tools',
+    label: 'Developer Tools',
+    color: '#64748b',
+    blurb: 'The everyday toolkit that keeps dev work sharp.',
+  },
+  {
+    id: 'automation',
+    label: 'Automation',
+    color: '#e879f9',
+    blurb: 'Workflow automation that removes repetitive work.',
+  },
+];
+
+export const skills = [
+  // Programming Languages
+  { id: 'java', name: 'Java', category: 'languages', color: '#f89820', icon: 'java' },
+  { id: 'javascript', name: 'JavaScript (ES6+)', category: 'languages', color: '#f7df1e', icon: 'javascript' },
+  { id: 'python', name: 'Python', category: 'languages', color: '#3776ab', icon: 'python' },
+  { id: 'typescript', name: 'TypeScript', category: 'languages', color: '#3178c6', icon: 'typescript' },
+  { id: 'dart', name: 'Dart', category: 'languages', color: '#0175c2', icon: 'dart' },
+
+  // Frontend
+  { id: 'html5', name: 'HTML5', category: 'frontend', color: '#e34f26', icon: 'html5' },
+  { id: 'css3', name: 'CSS3', category: 'frontend', color: '#1572b6', icon: 'css3' },
+  { id: 'react', name: 'React.js', category: 'frontend', color: '#61dafb', icon: 'react' },
+  { id: 'tailwind', name: 'Tailwind CSS', category: 'frontend', color: '#06b6d4', icon: 'tailwind' },
+  { id: 'bootstrap', name: 'Bootstrap', category: 'frontend', color: '#7952b3', icon: 'bootstrap' },
+  { id: 'responsive', name: 'Responsive Web Design', category: 'frontend', color: '#0891b2', icon: 'responsive' },
+
+  // Backend
+  { id: 'node', name: 'Node.js', category: 'backend', color: '#3c873a', icon: 'node' },
+  { id: 'express', name: 'Express.js', category: 'backend', color: '#64748b', icon: 'express', darkSafe: true },
+  { id: 'restapi', name: 'REST APIs', category: 'backend', color: '#f59e0b', icon: 'restapi' },
+  { id: 'jwt', name: 'JWT Authentication', category: 'backend', color: '#6366f1', icon: 'jwt' },
+  { id: 'bcrypt', name: 'bcrypt', category: 'backend', color: '#14b8a6', icon: 'bcrypt' },
+
+  // Databases
+  { id: 'mongodb', name: 'MongoDB', category: 'databases', color: '#47a248', icon: 'mongodb' },
+  { id: 'mysql', name: 'MySQL', category: 'databases', color: '#4479a1', icon: 'mysql' },
+  { id: 'postgresql', name: 'PostgreSQL', category: 'databases', color: '#4169e1', icon: 'postgresql' },
+  { id: 'nedb', name: 'NeDB', category: 'databases', color: '#43a047', icon: 'nedb' },
+
+  // AI / Generative AI
+  { id: 'genai', name: 'Generative AI', category: 'ai', color: '#a855f7', icon: 'genai' },
+  { id: 'llm', name: 'LLMs', category: 'ai', color: '#7c3aed', icon: 'llm' },
+  { id: 'rag', name: 'RAG', category: 'ai', color: '#d946ef', icon: 'rag' },
+  { id: 'langchain', name: 'LangChain', category: 'ai', color: '#1c3c3c', icon: 'langchain', darkSafe: true },
+  { id: 'huggingface', name: 'Hugging Face', category: 'ai', color: '#ffd21e', icon: 'huggingface' },
+  { id: 'aiapi', name: 'AI API Integration', category: 'ai', color: '#38bdf8', icon: 'aiapi' },
+  { id: 'prompt', name: 'Prompt Engineering', category: 'ai', color: '#f97316', icon: 'prompt' },
+
+  // Real-Time & Communication
+  { id: 'socketio', name: 'Socket.IO', category: 'realtime', color: '#334155', icon: 'socketio', darkSafe: true },
+  { id: 'webrtc', name: 'WebRTC', category: 'realtime', color: '#4338ca', icon: 'webrtc' },
+  { id: 'peerjs', name: 'PeerJS', category: 'realtime', color: '#0d9488', icon: 'peerjs' },
+
+  // Testing & Automation
+  { id: 'playwright', name: 'Playwright', category: 'testing', color: '#2ead33', icon: 'playwright' },
+  { id: 'browsertest', name: 'Automated Browser Testing', category: 'testing', color: '#3fb950', icon: 'browsertest' },
+  { id: 'aitest', name: 'AI-powered Testing', category: 'testing', color: '#65a30d', icon: 'aitest' },
+
+  // DevOps & Deployment
+  { id: 'docker', name: 'Docker', category: 'devops', color: '#2496ed', icon: 'docker' },
+  { id: 'compose', name: 'Docker Compose', category: 'devops', color: '#2496ed', icon: 'compose' },
+  { id: 'aws', name: 'AWS', category: 'devops', color: '#ff9900', icon: 'aws' },
+  { id: 'render', name: 'Render', category: 'devops', color: '#46e3b7', icon: 'render' },
+
+  // Developer Tools
+  { id: 'git', name: 'Git', category: 'tools', color: '#f05032', icon: 'git' },
+  { id: 'github', name: 'GitHub', category: 'tools', color: '#6e7681', icon: 'github', darkSafe: true },
+  { id: 'vscode', name: 'VS Code', category: 'tools', color: '#007acc', icon: 'vscode' },
+  { id: 'npm', name: 'npm', category: 'tools', color: '#cb3837', icon: 'npm' },
+  { id: 'hoppscotch', name: 'Hoppscotch / API Testing', category: 'tools', color: '#1fba9a', icon: 'hoppscotch' },
+
+  // Automation
+  { id: 'n8n', name: 'n8n', category: 'automation', color: '#ea4b71', icon: 'n8n' },
 ];
 
 export const experiences = [
@@ -81,7 +164,7 @@ export const experiences = [
     company: 'Zestro',
     org: 'F&B CRM / POS management platform · Start-up',
     location: 'Remote',
-    period: '2025 — Present',
+    period: 'July 2026 — Present',
     highlights: [
       'Building Zestro, an F&B CRM/POS management app using React, TypeScript, MUI, and MongoDB.',
       'Shipped a solution to a problem raised by the customer, helping a pilot customer manage 400+ orders on the platform.',
