@@ -3,9 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "start": "node server.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -13,6 +17,7 @@
     "@headlessui/react": "^2.2.7",
     "clsx": "^2.1.1",
     "emailjs-com": "^3.2.0",
+    "express": "^4.22.3",
     "formik": "^2.4.6",
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.344.0",

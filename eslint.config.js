@@ -8,6 +8,12 @@ export default [
   { ignores: ['dist', 'node_modules'] },
   js.configs.recommended,
   {
+    files: ['api/**/*.js', 'server.js'],
+    languageOptions: {
+      globals: globals.node,
+    },
+  },
+  {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
       ecmaVersion: 2022,
