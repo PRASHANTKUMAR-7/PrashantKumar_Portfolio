@@ -11,9 +11,6 @@ app.use(express.static(DIST));
 // Health check used by uptime/keep-alive pingers (same idea as Sprintly's /health)
 app.get('/health', (_req, res) => res.status(200).json({ status: 'ok' }));
 
-// Mirror the Vercel serverless path so either platform works with the same pinger
-app.get('/api/health', (_req, res) => res.status(200).json({ status: 'ok' }));
-
 // SPA fallback: unknown extension-less routes render index.html.
 // Paths that look like files (or missing /api routes) fall through to a clean 404.
 app.get('*', (req, res, next) => {

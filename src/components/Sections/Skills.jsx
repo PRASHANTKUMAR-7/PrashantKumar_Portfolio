@@ -1,39 +1,29 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import {
-  BrainCircuit,
   DatabaseZap,
-  FlaskConical,
   KeyRound,
-  MessageSquareText,
-  MonitorSmartphone,
-  MousePointerClick,
-  ShieldCheck,
   Sparkles,
   Waypoints,
   Workflow,
 } from 'lucide-react';
 import {
   SiAmazonwebservices,
-  SiBootstrap,
   SiCss3,
-  SiDart,
   SiDocker,
   SiExpress,
   SiGit,
   SiGithub,
-  SiHoppscotch,
   SiHtml5,
-  SiHuggingface,
   SiJavascript,
   SiLangchain,
   SiMongodb,
-  SiMysql,
   SiN8N,
   SiNodedotjs,
   SiNpm,
-  SiPython,
   SiPostgresql,
+  SiPostman,
+  SiPython,
   SiReact,
   SiRender,
   SiSocketdotio,
@@ -65,82 +55,38 @@ const PlaywrightIcon = ({ className }) => (
   </svg>
 );
 
-const PeerIcon = ({ className }) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
-    <circle cx="12" cy="4.5" r="2.1" />
-    <circle cx="4.5" cy="17.5" r="2.1" />
-    <circle cx="19.5" cy="17.5" r="2.1" />
-    <path d="m10.35 6.1-4.2 9.8" />
-    <path d="m13.65 6.1 4.2 9.8" />
-    <path d="M6.6 17.5h10.8" />
-  </svg>
-);
-
-const NeDBIcon = ({ className }) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
-    <path d="M12 3.2 8.4 19.1a1 1 0 0 0 .96 1.27h5.28a1 1 0 0 0 .96-1.27L12 3.2Z" />
-    <path d="M12 3.2c.9 3.1-1.1 5.5-3 6.7" />
-  </svg>
-);
-
-const ComposeIcon = ({ className }) => (
-  <span className={`relative inline-flex items-center justify-center ${className ?? ''}`}>
-    <SiDocker className="h-6 w-6" />
-    <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full border border-slate-200 bg-white shadow-sm dark:border-slate-600 dark:bg-slate-800">
-      <svg viewBox="0 0 12 12" className="h-2.5 w-2.5" fill="currentColor" aria-hidden="true">
-        <rect x="6.5" y="1.8" width="4" height="1.4" rx="0.7" />
-        <rect x="4" y="5.2" width="6.5" height="1.4" rx="0.7" />
-        <rect x="1.5" y="8.6" width="9" height="1.4" rx="0.7" />
-      </svg>
-    </span>
-  </span>
-);
-
 /* ---------- Icon registry: brand logos (<Icon>) + concept glyphs (lucide) ---------- */
 
 const ICONS = {
-  java: JavaIcon,
   javascript: SiJavascript,
   python: SiPython,
   typescript: SiTypescript,
-  dart: SiDart,
+  java: JavaIcon,
   html5: SiHtml5,
   css3: SiCss3,
   react: SiReact,
   tailwind: SiTailwindcss,
-  bootstrap: SiBootstrap,
-  responsive: MonitorSmartphone,
   node: SiNodedotjs,
   express: SiExpress,
   restapi: Waypoints,
   jwt: KeyRound,
-  bcrypt: ShieldCheck,
   mongodb: SiMongodb,
-  mysql: SiMysql,
   postgresql: SiPostgresql,
-  nedb: NeDBIcon,
   genai: Sparkles,
-  llm: BrainCircuit,
   rag: DatabaseZap,
   langchain: SiLangchain,
-  huggingface: SiHuggingface,
   aiapi: Workflow,
-  prompt: MessageSquareText,
   socketio: SiSocketdotio,
   webrtc: SiWebrtc,
-  peerjs: PeerIcon,
   playwright: PlaywrightIcon,
-  browsertest: MousePointerClick,
-  aitest: FlaskConical,
   docker: SiDocker,
-  compose: ComposeIcon,
   aws: SiAmazonwebservices,
   render: SiRender,
   git: SiGit,
   github: SiGithub,
   vscode: VSCodeIcon,
   npm: SiNpm,
-  hoppscotch: SiHoppscotch,
+  postman: SiPostman,
   n8n: SiN8N,
 };
 
@@ -205,7 +151,7 @@ const SkillCard = ({ skill, category }) => {
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
         style={{ '--sc': skill.color, '--fg': fg }}
-        className="skill-card card group relative flex h-full min-h-[7rem] flex-col overflow-hidden"
+        className="skill-card card group relative flex h-full min-h-[5rem] flex-col overflow-hidden"
       >
         <span aria-hidden="true" className="skill-glow" ref={glowRef} />
         <span aria-hidden="true" className="skill-glare" />
@@ -215,9 +161,9 @@ const SkillCard = ({ skill, category }) => {
           style={{ background: skill.color }}
         />
 
-        <div className="relative flex flex-1 items-center gap-3.5 p-4 sm:gap-4 sm:p-5">
+        <div className="relative flex flex-1 items-center gap-2.5 p-3 sm:gap-3 sm:p-3">
           <span className={`skill-tile ${skill.darkSafe ? 'dark-auto' : ''}`}>
-            <Icon className="h-6 w-6" />
+            <Icon className="h-5 w-5" />
           </span>
 
           <span className="min-w-0 flex-1">
@@ -322,7 +268,7 @@ const Skills = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: 'easeOut' }}
-          className="mx-auto grid max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6 xl:grid-cols-4"
+          className="mx-auto grid max-w-4xl grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4"
         >
           {shown.map((skill, index) => {
             const category = skillCategories.find((cat) => cat.id === skill.category);

@@ -22,23 +22,16 @@ const About = () => (
         <Reveal>
           <div className="space-y-4 leading-relaxed text-slate-600 dark:text-slate-400">
             <p>
-              I'm a Computer Science Engineering student (B.Tech, graduating 2026) and a passionate
-              software developer driven by curiosity and the desire to build meaningful technology.
-              I've worked as a Founding Engineer at Zestro and completed an internship at the Jay
-              Chaudhry Software Innovation Centre, IIT (BHU) Varanasi, where I built LLM automation
-              pipelines and AI-powered tooling.
+              I'm a Computer Science Engineering student (B.Tech, 2026) and software developer
+              focused on building meaningful, scalable technology. I've worked as a Founding
+              Engineer at Zestro and interned at the Jay Chaudhry Software Innovation Centre, IIT
+              (BHU) Varanasi, building AI-powered tools and LLM automation pipelines.
             </p>
             <p>
-              Along the way I've picked up payment integrations (Stripe), real-time systems
-              (Socket.IO, WebRTC), and cloud deployment (Render, AWS). On the frontend I work with
-              React, TypeScript, Material UI, and Tailwind CSS; on the backend with Node.js,
-              Express, MongoDB, and PostgreSQL.
-            </p>
-            <p>
-              Right now I'm deepening my skills in containers and orchestration (Docker,
-              Kubernetes, OpenShift) and applied AI (LangChain, Hugging Face, Gemini AI, prompt
-              engineering) — building systems where AI can reason, call tools, and act
-              autonomously. My focus areas are:
+              I work with React, TypeScript, Node.js, Express, MongoDB, PostgreSQL, Socket.IO, and
+              WebRTC, with hands-on experience in payment integration using Stripe. Currently, I'm
+              expanding my expertise in Docker, AWS, Kubernetes, OpenShift, and applied AI with
+              LangChain.
             </p>
           </div>
         </Reveal>

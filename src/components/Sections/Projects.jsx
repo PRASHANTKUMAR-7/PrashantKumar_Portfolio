@@ -15,8 +15,8 @@ const CATEGORIES = [
 
 const ProjectCard = ({ project, index, onSelect }) => (
   <Reveal delay={(index % 2) + 1} className="h-full">
-    <article className="card group flex h-full flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-      <div className="relative aspect-[16/10] overflow-hidden bg-slate-100 dark:bg-slate-800">
+    <article className="card group flex h-full scale-[0.9] flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+      <div className="relative aspect-[16/10] scale-[0.95] overflow-hidden rounded-xl bg-slate-100 dark:bg-slate-800">
         <ProjectPreview id={project.id} title={project.title} stack={project.stack} image={project.image} />
         {project.featured && (
           <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-slate-950/60 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur">
